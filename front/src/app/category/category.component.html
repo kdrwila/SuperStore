@@ -1,0 +1,20 @@
+<li *ngFor="let category of categories">
+	<div *ngIf="category.opis == 'promocja'">PROMO!</div>
+	{{ category.tytul}} - {{ category.opis }}
+</li>
+
+<form [formGroup]="categoryForm" (ngSubmit)="addCategory($event)">
+	<div class="form-group">
+ <label for="tytul">Tytuł</label><input id="tytul" formControlName="tytul" type="text" placeholder="Category name" class=".form-control">
+	</div>
+	<div class="form-group">
+	<label for="opis">Opis</label><textarea id="opis" formControlName="opis" placeholder="Category description" class=".form-control"></textarea>
+	</div>
+	<button type="submit">Add</button>
+</form>
+
+<select [(ngModel)]="Cateory">
+	<ng-container *ngFor="let c of categories">
+			<option [ngValue]="c">{{c.tytul}} ({{c.opis}})</option>
+	</ng-container>
+</select>
