@@ -12,7 +12,7 @@ case class Products(prodId: Long, tytul: String, opis: String)
 
 //, catId: Long, createdAt: Timestamp
 
-//case class Categories(catId: Long, tytul: String)
+case class Categories(catId: Long, tytul: String, opis: String)
 
 //case class Purchases(purId: Long, prodId: Long, userId: Long)
 
