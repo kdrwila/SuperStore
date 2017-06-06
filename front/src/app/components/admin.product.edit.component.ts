@@ -46,10 +46,8 @@ export class AdminProductEditComponent implements OnInit
 		this.categoryService.getCategories().subscribe(data => this.categories = data);
 	}
 
-	// addProduct(event) 
-	// {
-	// 	console.log(event);
-	// 	console.log(this.productForm.value);
-	// 	this.productService.sendToPlay(this.productForm.value);
-	// }
+	updateProduct(event) 
+	{
+		this.productService.updateProduct(this.productForm.value, this.id);
+	}
 }

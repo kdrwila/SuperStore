@@ -58,10 +58,19 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def newproduct = Action 
 	{ implicit request =>
-		var json:ProductsPOST = request.body.asJson.get.as[ProductsPOST]
+		var json: ProductsPOST = request.body.asJson.get.as[ProductsPOST]
 		var product = Products(prodId = 0, tytul = json.tytul, opis = json.opis, catId = json.catId)
-		println(product);
 		productsDAO.insert(product)
+		Ok(request.body.asJson.get)
+	}
+
+	def updateproduct(id: Long) = Action
+	{ implicit request =>
+		var json: ProductsPOST = request.body.asJson.get.as[ProductsPOST]
+		var product = Products(prodId = id, tytul = json.tytul, opis = json.opis, catId = json.catId)
+		println(product)
+
+		productsDAO.update(product)
 		Ok(request.body.asJson.get)
 	}
 
