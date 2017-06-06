@@ -4,15 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 
-import { AppComponent } from './app.component';
-import { ProductComponent } from './product/product.component';
-import { CategoryComponent } from './category/category.component';
+import { AppComponent } from '../components/index.component';
+import { ProductComponent } from '../components/admin.product.component';
+import { CategoryComponent } from '../components/admin.category.component';
 import { RouterModule } from "@angular/router";
-import { ProductService } from "./product/product.service";
-import { CategoryService } from "./category/category.service";
+import { ProductService } from "../services/product.service";
+import { CategoryService } from "../services/category.service";
 
 
-@NgModule({
+@NgModule(
+{
 	declarations: 
 	[
 		AppComponent,
@@ -28,8 +29,8 @@ import { CategoryService } from "./category/category.service";
 		RouterModule.forRoot(
 		[
 			{ path: '.', component: AppComponent },
-			{ path: 'products', component: ProductComponent },
-			{ path: 'categories', component: CategoryComponent },
+			{ path: 'admin/products', component: ProductComponent },
+			{ path: 'admin/categories', component: CategoryComponent },
 			{ path: 'moreparams/:tytul/:opis', component: ProductComponent }
 		])
 	],

@@ -26,7 +26,7 @@ class CategoriesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
 		val futureCategories = db.run(results)
 		futureCategories.map(
 			_.map {
-				a => CategoriesREST(opis = a.opis, tytul = a.tytul)
+				a => CategoriesREST(catId = a.catId, opis = a.opis, tytul = a.tytul)
 			}.toList
         )
 	}
@@ -39,7 +39,7 @@ class CategoriesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
 		futureCategories.map(
 			_.map
 			{
-				a => CategoriesREST(opis = a.opis, tytul = a.tytul)
+				a => CategoriesREST(catId = a.catId, opis = a.opis, tytul = a.tytul)
 			}.toList
 		)
 	}

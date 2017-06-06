@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions} from "@angular/http";
-import {Product} from "./product";
+import {Product} from "../models/product";
 import 'rxjs/add/operator/map';
 
 @Injectable()

@@ -13,7 +13,7 @@
 	<button type="submit">Add</button>
 </form>
 
-<select [(ngModel)]="Cateory">
+<select [(ngModel)]="Category">
 	<ng-container *ngFor="let c of categories">
 			<option [ngValue]="c">{{c.tytul}} ({{c.opis}})</option>
 	</ng-container>
