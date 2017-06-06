@@ -30,11 +30,19 @@ class ProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvid
 			}.toList)
 	}
 
-	def get(id: Long): Future[List[ProductsREST]] =
+	def get(id: Long): Future[Option[Products]] =
 	{
 		val query = Products.filter(_.prodId === id)
+		val result = query.result
+		db.run(result.headOption)
+	}
+
+	def getFromCat(catId: Long): Future[List[ProductsREST]] =
+	{
+		val query = Products.filter(_.catId === catId)
 		val results = query.result
 		val futureProducts = db.run(results)
+
 		futureProducts.map(
 			_.map
 			{

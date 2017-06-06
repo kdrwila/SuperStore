@@ -23,6 +23,15 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 			"opis"	-> option.get.opis
 		)
 	}
+	
+	implicit val productsWrites = new Writes[Option[models.Products]] 
+	{
+		def writes(option: Option[Products]) = Json.obj(
+			"prodId"	-> option.get.prodId,
+			"tytul"		-> option.get.tytul,
+			"opis"		-> option.get.opis
+		)
+	}
 
 	def index = Action 
 	{ implicit request =>
@@ -72,9 +81,20 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def getcategory(id: Long) = Action.async 
 	{ implicit request =>
+
+		var cat : JsValue = Json.obj()
 		categoriesDAO.get(id) map
-		{
-			category => Ok(Json.toJson(category))
+		{ category => 
+			cat = Json.toJson(category)
 		}
+		productsDAO.getFromCat(id) map
+		{ products => 
+			Json.toJson(products)
+			Ok(Json.obj(
+				"category" -> cat,
+				"products" -> products
+			))
+		}
+
 	}	
 }
