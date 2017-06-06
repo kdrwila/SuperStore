@@ -30,7 +30,8 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 		def writes(option: Option[Products]) = Json.obj(
 			"prodId"	-> option.get.prodId,
 			"tytul"		-> option.get.tytul,
-			"opis"		-> option.get.opis
+			"opis"		-> option.get.opis,
+			"catId"		-> option.get.catId
 		)
 	}
 
