@@ -14,7 +14,7 @@ export class CategoryComponent implements OnInit
 {
 	id: number;
   	private sub: any;
-	category: Category;
+	categoryData: any;
 
 	constructor(private categoryService: CategoryService, private route: ActivatedRoute) { }
 
@@ -27,7 +27,7 @@ export class CategoryComponent implements OnInit
 
 		this.categoryService.getCategory(this.id).subscribe
 		(
-			category => this.category = category
+			data => this.categoryData = data
 		);
 	}
 
