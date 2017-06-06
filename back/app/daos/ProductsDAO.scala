@@ -26,7 +26,7 @@ class ProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvid
 		val futureProducts = db.run(results)
 		futureProducts.map(
 			_.map {
-				a => ProductsREST(opis = a.opis, tytul = a.tytul, catId = a.catId)
+				a => ProductsREST(prodId = a.prodId, opis = a.opis, tytul = a.tytul, catId = a.catId)
 			}.toList)
 	}
 
@@ -46,7 +46,7 @@ class ProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvid
 		futureProducts.map(
 			_.map
 			{
-				a => ProductsREST(opis = a.opis, tytul = a.tytul, catId = a.catId)
+				a => ProductsREST(prodId = a.prodId, opis = a.opis, tytul = a.tytul, catId = a.catId)
 			}.toList
 		)
 	}

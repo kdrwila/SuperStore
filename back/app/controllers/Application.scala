@@ -5,6 +5,7 @@ import javax.inject.Inject
 import daos.ProductsDAO
 import daos.CategoriesDAO
 import models.ProductsREST
+import models.ProductsPOST
 import models.CategoriesREST
 import models.CategoriesPOST
 import models.Products
@@ -56,7 +57,7 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def newproduct = Action 
 	{ implicit request =>
-		var json:ProductsREST = request.body.asJson.get.as[ProductsREST]
+		var json:ProductsPOST = request.body.asJson.get.as[ProductsPOST]
 		var product = Products(prodId = 0, tytul = json.tytul, opis = json.opis, catId = json.catId)
 		println(product);
 		productsDAO.insert(product)
