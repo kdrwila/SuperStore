@@ -12,7 +12,7 @@ POST    /api/product                @controllers.Application.newproduct
 # DELETE /api/product/*id
 
 GET /api/categories                 @controllers.Application.listcategories
-# GET /api/category/*id
+GET /api/category/*id               @controllers.Application.getcategory(id: Long)
 POST /api/category                  @controllers.Application.newcategory
 # PUT /api/category/*id
 # DELETE /api/category/*id

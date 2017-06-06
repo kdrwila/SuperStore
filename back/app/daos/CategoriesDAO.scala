@@ -31,17 +31,18 @@ class CategoriesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
         )
 	}
 
-	def get(id: Long): Future[List[CategoriesREST]] =
+	def get(id: Long): Future[Option[Categories]] =
 	{
 		val query = Categories.filter(_.catId === id)
-		val results = query.result
-		val futureCategories = db.run(results)
-		futureCategories.map(
-			_.map
-			{
-				a => CategoriesREST(catId = a.catId, opis = a.opis, tytul = a.tytul)
-			}.toList
-		)
+		val result = query.result
+		db.run(result.headOption)
+		// val futureCategory = db.run(results)
+		// futureCategory.map(
+		// 	_.map
+		// 	{
+		// 		a => CategoriesREST(catId = a.catId, opis = a.opis, tytul = a.tytul)
+		// 	}.take(1)
+		// )
 	}
 
 	def insert(category: Categories): Future[Unit] = db.run(Categories += category).map { _ => () }

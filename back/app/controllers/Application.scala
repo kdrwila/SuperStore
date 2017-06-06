@@ -8,12 +8,21 @@ import models.ProductsREST
 import models.CategoriesREST
 import models.Products
 import models.Categories
-import play.api.libs.json.Json
+import play.api.libs.json._
 import play.api.mvc._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
 class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: CategoriesDAO) extends Controller
 {
+	implicit val categoriesWrites = new Writes[Option[models.Categories]] 
+	{
+		def writes(option: Option[Categories]) = Json.obj(
+			"catId"	-> option.get.catId,
+			"tytul"	-> option.get.tytul,
+			"opis"	-> option.get.opis
+		)
+	}
+
 	def index = Action 
 	{ implicit request =>
 		Ok(views.html.index.render(""))
@@ -58,5 +67,12 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 		categoriesDAO.insert(category)
 		Ok(request.body.asJson.get)
 	}
-		
+
+	def getcategory(id: Long) = Action.async 
+	{ implicit request =>
+		categoriesDAO.get(id) map
+		{
+			category => Ok(Json.toJson(category))
+		}
+	}	
 }
