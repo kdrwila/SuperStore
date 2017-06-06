@@ -11,7 +11,7 @@ import { ActivatedRoute } from "@angular/router";
 	styleUrls: ['../css/category.component.css']
 })
 
-export class CategoryComponent implements OnInit 
+export class AdminCategoryComponent implements OnInit 
 {
 	categories: Category[];
 	categoryForm: FormGroup;

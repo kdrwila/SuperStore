@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from '../components/index.component';
 import { ProductComponent } from '../components/admin.product.component';
-import { CategoryComponent } from '../components/admin.category.component';
+import { AdminCategoryComponent } from '../components/admin.category.component';
+import { CategoryComponent } from '../components/category.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
@@ -18,6 +19,7 @@ import { CategoryService } from "../services/category.service";
 	[
 		AppComponent,
 		ProductComponent,
+		AdminCategoryComponent,
 		CategoryComponent
 	],
 	imports: 
@@ -30,7 +32,8 @@ import { CategoryService } from "../services/category.service";
 		[
 			{ path: '.', component: AppComponent },
 			{ path: 'admin/products', component: ProductComponent },
-			{ path: 'admin/categories', component: CategoryComponent },
+			{ path: 'admin/categories', component: AdminCategoryComponent },
+			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'moreparams/:tytul/:opis', component: ProductComponent }
 		])
 	],

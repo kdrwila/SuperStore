@@ -16,7 +16,25 @@ export class CategoryService {
 
 		const options = new RequestOptions({headers: headers});
 
+		var recived;
+
+		this.http.get('http://localhost:9900/api/categories', options).map(response => <Category[]>response.json()).subscribe(data => recived = data);
+		console.log(recived);
+
 		return this.http.get('http://localhost:9900/api/categories', options).map(response => <Category[]>response.json());
+	}
+
+	getCategory(id: number)
+	{
+		const headers: Headers = new Headers();
+		headers.append('Accept', 'application/json');
+		headers.append('Content-Type', 'application/json');
+
+		const options = new RequestOptions({headers: headers});
+
+		console.log(this.http.get('http://localhost:9900/api/category/' + id, options));
+
+		return this.http.get('http://localhost:9900/api/category/' + id, options).map(response => <Category>response.json());
 	}
 
 	sendToPlay(formData) 
