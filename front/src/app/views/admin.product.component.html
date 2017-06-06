@@ -1,22 +1,32 @@
 <li *ngFor="let product of products">
-  <div *ngIf="product.opis == 'promocja'">PROMO!</div>
-  {{ product.tytul}} - {{ product.opis }}
+	<div *ngIf="product.opis == 'promocja'">PROMO!</div>
+	{{ product.tytul}} - {{ product.opis }}
 </li>
 
 <form [formGroup]="productForm" (ngSubmit)="addProduct($event)">
-  <div class="form-group">
- <label for="tytul">Tytuł</label><input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class=".form-control">
-  </div>
-  <div class="form-group">
-  <label for="opis">Opis</label><textarea id="opis" formControlName="opis" placeholder="Product description" class=".form-control"></textarea>
-  </div>
-  <button type="submit">Add</button>
+	<div class="form-group">
+		<label for="tytul">Tytuł</label>
+		<input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="opis">Opis</label>
+		<textarea id="opis" formControlName="opis" placeholder="Product description" class="form-control"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="catId">Kategoria</label>
+		<select id="catId" formControlName="catId" class="form-control">
+			<ng-container *ngFor="let c of categories">
+				<option [ngValue]="c.catId">{{c.tytul}}</option>
+			</ng-container>
+		</select>
+	</div>
+	<button type="submit">Add</button>
 </form>
 
 <select [(ngModel)]="Product">
-  <ng-container *ngFor="let p of products">
-      <option [ngValue]="p">{{p.tytul}} ({{p.opis}})</option>
-  </ng-container>
+	<ng-container *ngFor="let p of products">
+		<option [ngValue]="p">{{p.tytul}} ({{p.opis}})</option>
+	</ng-container>
 </select>
 
 
