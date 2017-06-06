@@ -10,7 +10,7 @@ import { Category } from '../models/category';
 
 export class AppComponent implements OnInit
 {
-	title = 'Hello World!';
+	title = 'SuperStore';
 	categories: Category[];
 
 	constructor(private categoryService: CategoryService) { }
