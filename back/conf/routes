@@ -9,7 +9,7 @@ GET     /api/products               @controllers.Application.listproducts
 GET     /api/product/:id            @controllers.Application.getproduct(id: Long)
 POST    /api/product                @controllers.Application.newproduct
 PUT     /api/product/*id            @controllers.Application.updateproduct(id: Long)
-# DELETE /api/product/*id
+DELETE  /api/product/*id            @controllers.Application.removeproduct(id: Long)
 
 GET /api/categories                 @controllers.Application.listcategories
 GET /api/category/*id               @controllers.Application.getcategory(id: Long)

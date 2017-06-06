@@ -53,16 +53,15 @@ class ProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvid
 
 	def insert(product: Products): Future[Unit] = db.run(Products += product).map { _ => () }
 
-	// def update(product: Products): Future[Unit] = db.run
-	// {
-	// 	Products.filter(_.prodId === product.prodId).update(product)
-	// }
-
 	def update(product: Products): Future[Unit] = db.run {
 		val query = for { p <- Products if p.prodId === product.prodId } yield p
 		query.update(product).map(_ => ())
 	}
 
+	def remove(id: Long): Future[Unit] = db.run {
+		val query = for { p <- Products if p.prodId === id } yield p
+		query.delete.map(_ => ())
+	}
 
 	class ProductsTable(tag: Tag) extends Table[Products](tag, "Products") 
 	{

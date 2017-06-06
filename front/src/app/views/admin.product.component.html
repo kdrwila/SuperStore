@@ -7,7 +7,7 @@
 <ul class="list-group">
 	<li class="list-group-item" *ngFor="let product of products">
 		<a href="/admin/product/{{ product.prodId }}"> {{ product.tytul }} </a>
-		<button type="button" class="btn btn-danger btn-xs pull-right"><i class="glyphicon glyphicon-remove"></i></button>
+		<button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-remove"></i></button>
 	</li>
 </ul>
 

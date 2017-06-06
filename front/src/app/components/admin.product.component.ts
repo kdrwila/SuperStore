@@ -37,8 +37,25 @@ export class AdminProductComponent implements OnInit
 
 	addProduct(event) 
 	{
-		console.log(event);
-		console.log(this.productForm.value);
 		this.productService.sendToPlay(this.productForm.value);
+	}
+
+	removeProduct(id: number)
+	{
+		this.productService.removeProduct(id);
+
+		var products = this.products;
+
+		var i = 0;
+		this.products.forEach(function(product)
+		{
+			if(product.prodId == id)
+			{
+				products.splice(i, 1);
+			}
+			i ++;
+		});
+
+		this.products = products;
 	}
 }

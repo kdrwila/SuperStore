@@ -74,6 +74,12 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 		Ok(request.body.asJson.get)
 	}
 
+	def removeproduct(id: Long) = Action
+	{ implicit request =>
+		productsDAO.remove(id)
+		Ok("")
+	}
+
 	def listcategories = Action.async 
 	{ implicit request =>
 		categoriesDAO.all map

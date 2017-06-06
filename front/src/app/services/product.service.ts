@@ -63,4 +63,19 @@ export class ProductService
 			error => console.error('nie bangla', error)
 		);
 	}
+
+	removeProduct(id: number)
+	{
+		const headers: Headers = new Headers();
+		headers.append('Accept', 'application/json');
+		headers.append('Content-Type', 'application/json');
+
+		const options = new RequestOptions({headers: headers});
+
+		this.http.delete('http://localhost:9900/api/product/' + id, options).subscribe
+		(
+			data => console.log('wyslane!', data),
+			error => console.error('nie bangla', error)
+		);
+	}
 }
