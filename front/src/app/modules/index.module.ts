@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from '../components/index.component';
-import { ProductComponent } from '../components/admin.product.component';
+import { AdminProductComponent } from '../components/admin.product.component';
 import { AdminCategoryComponent } from '../components/admin.category.component';
 import { CategoryComponent } from '../components/category.component';
 import { RouterModule } from "@angular/router";
@@ -18,7 +18,7 @@ import { CategoryService } from "../services/category.service";
 	declarations: 
 	[
 		AppComponent,
-		ProductComponent,
+		AdminProductComponent,
 		AdminCategoryComponent,
 		CategoryComponent
 	],
@@ -31,10 +31,10 @@ import { CategoryService } from "../services/category.service";
 		RouterModule.forRoot(
 		[
 			{ path: '.', component: AppComponent },
-			{ path: 'admin/products', component: ProductComponent },
+			{ path: 'admin/products', component: AdminProductComponent },
 			{ path: 'admin/categories', component: AdminCategoryComponent },
 			{ path: 'category/:id', component: CategoryComponent },
-			{ path: 'moreparams/:tytul/:opis', component: ProductComponent }
+			{ path: 'moreparams/:tytul/:opis', component: AdminProductComponent }
 		])
 	],
 	providers: [ProductService, CategoryService],

@@ -12,7 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 	templateUrl: '../views/admin.product.component.html',
 	styleUrls: ['../css/product.component.css']
 })
-export class ProductComponent implements OnInit 
+export class AdminProductComponent implements OnInit 
 {
 	products: Product[];
 	categories: Category[];
