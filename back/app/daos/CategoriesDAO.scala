@@ -2,7 +2,7 @@ package daos
 
 import javax.inject.Inject
 
-import models.{Categories, CategoriesREST}
+import models.{Categories, CategoriesREST, CategoriesPOST}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.driver.JdbcProfile
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -36,13 +36,6 @@ class CategoriesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
 		val query = Categories.filter(_.catId === id)
 		val result = query.result
 		db.run(result.headOption)
-		// val futureCategory = db.run(results)
-		// futureCategory.map(
-		// 	_.map
-		// 	{
-		// 		a => CategoriesREST(catId = a.catId, opis = a.opis, tytul = a.tytul)
-		// 	}.take(1)
-		// )
 	}
 
 	def insert(category: Categories): Future[Unit] = db.run(Categories += category).map { _ => () }

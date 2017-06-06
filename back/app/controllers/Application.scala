@@ -6,6 +6,7 @@ import daos.ProductsDAO
 import daos.CategoriesDAO
 import models.ProductsREST
 import models.CategoriesREST
+import models.CategoriesPOST
 import models.Products
 import models.Categories
 import play.api.libs.json._
@@ -47,7 +48,8 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 	def newproduct = Action 
 	{ implicit request =>
 		var json:ProductsREST = request.body.asJson.get.as[ProductsREST]
-		var product = Products(prodId = 0, tytul = json.tytul, opis = json.opis)
+		var product = Products(prodId = 0, tytul = json.tytul, opis = json.opis, catId = json.catId)
+		println(product);
 		productsDAO.insert(product)
 		Ok(request.body.asJson.get)
 	}
@@ -62,7 +64,7 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def newcategory = Action 
 	{ implicit request =>
-		var json:CategoriesREST = request.body.asJson.get.as[CategoriesREST]
+		var json:CategoriesPOST = request.body.asJson.get.as[CategoriesPOST]
 		var category = Categories(catId = 0, tytul = json.tytul, opis = json.opis)
 		categoriesDAO.insert(category)
 		Ok(request.body.asJson.get)

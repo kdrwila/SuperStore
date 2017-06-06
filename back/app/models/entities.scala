@@ -8,7 +8,7 @@ import play.api.libs.json.Format
   * Created by kprzystalski on 23/04/17.
   */
 
-case class Products(prodId: Long, tytul: String, opis: String)
+case class Products(prodId: Long, tytul: String, opis: String, catId: Long)
 
 //, catId: Long, createdAt: Timestamp
 
