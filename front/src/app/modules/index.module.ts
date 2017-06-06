@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from '../components/index.component';
 import { AdminProductComponent } from '../components/admin.product.component';
+import { AdminProductEditComponent } from '../components/admin.product.edit.component';
 import { AdminCategoryComponent } from '../components/admin.category.component';
 import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
@@ -20,6 +21,7 @@ import { CategoryService } from "../services/category.service";
 	[
 		AppComponent,
 		AdminProductComponent,
+		AdminProductEditComponent,
 		AdminCategoryComponent,
 		CategoryComponent,
 		ProductComponent
@@ -34,6 +36,7 @@ import { CategoryService } from "../services/category.service";
 		[
 			{ path: '.', component: AppComponent },
 			{ path: 'admin/products', component: AdminProductComponent },
+			{ path: 'admin/product/:id', component: AdminProductEditComponent },
 			{ path: 'admin/categories', component: AdminCategoryComponent },
 			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'product/:id', component: ProductComponent },

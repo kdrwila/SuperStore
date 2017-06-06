@@ -1,7 +1,17 @@
-<li *ngFor="let product of products">
-	<div *ngIf="product.opis == 'promocja'">PROMO!</div>
-	{{ product.tytul}} - {{ product.opis }}
-</li>
+<ul class="breadcrumb">
+	<li><a href="/">Strona główna</a></li>
+	<li><a href="/admin/">Panel administratora</a></li>
+	<li class="active">Produkty</li>
+</ul> 
+
+<ul class="list-group">
+	<li class="list-group-item" *ngFor="let product of products">
+		<a href="/admin/product/{{ product.prodId }}"> {{ product.tytul }} </a>
+		<button type="button" class="btn btn-danger btn-xs pull-right"><i class="glyphicon glyphicon-remove"></i></button>
+	</li>
+</ul>
+
+<hr>
 
 <form [formGroup]="productForm" (ngSubmit)="addProduct($event)">
 	<div class="form-group">
@@ -22,11 +32,3 @@
 	</div>
 	<button type="submit">Add</button>
 </form>
-
-<select [(ngModel)]="Product">
-	<ng-container *ngFor="let p of products">
-		<option [ngValue]="p">{{p.tytul}} ({{p.opis}})</option>
-	</ng-container>
-</select>
-
-

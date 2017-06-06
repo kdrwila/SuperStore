@@ -1,3 +1,9 @@
+<ul class="breadcrumb">
+	<li><a href="/">Strona główna</a></li>
+	<li><a href="/admin/">Panel administratora</a></li>
+	<li class="active">Kategorie</li>
+</ul> 
+
 <li *ngFor="let category of categories">
 	<div *ngIf="category.opis == 'promocja'">PROMO!</div>
 	{{ category.tytul}} - {{ category.opis }}

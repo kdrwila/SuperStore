@@ -1,0 +1,28 @@
+ <section *ngIf="product && categories">
+    <ul class="breadcrumb">
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/admin/">Panel administratora</a></li>
+        <li><a href="/admin/products">Produkty</a></li>
+        <li class="active">{{ product.tytul }}</li>
+    </ul> 
+
+    <form [formGroup]="productForm" (ngSubmit)="updateProduct($event)" >
+        <div class="form-group">
+            <label for="tytul">Tytuł</label>
+            <input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="opis">Opis</label>
+            <textarea id="opis" formControlName="opis" placeholder="Product description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="catId">Kategoria</label>
+            <select id="catId" formControlName="catId" class="form-control">
+                <ng-container *ngFor="let c of categories">
+                    <option [ngValue]="c.catId">{{c.tytul}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <button type="submit">Zapisz</button>
+    </form>
+</section>

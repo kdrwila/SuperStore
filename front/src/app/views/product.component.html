@@ -1,4 +1,11 @@
 <section *ngIf="productData">
+    <ul class="breadcrumb">
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/categories/">Kategorie</a></li>
+        <li><a href="#">Nazwa Kategorii</a></li>
+        <li class="active">{{ productData.tytul }}</li>
+    </ul> 
+
     <h4>{{ productData.tytul }}</h4>
     <p>{{ productData.opis }}</p>
 </section>

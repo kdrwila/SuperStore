@@ -27,8 +27,6 @@ export class ProductService
 
 		const options = new RequestOptions({headers: headers});
 
-		console.log(this.http.get('http://localhost:9900/api/product/' + id, options));
-
 		return this.http.get('http://localhost:9900/api/product/' + id, options).map(response => <Product>response.json());
 	}
 
