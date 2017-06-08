@@ -17,9 +17,10 @@ export class AdminProductEditComponent implements OnInit
 {
 	id: number;
   	private sub: any;
-	product: Product;
+	product: any;
 	categories: Category[];
 	productForm: FormGroup;
+	productTypeForm: FormGroup;
 
 	constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) { }
 
@@ -37,9 +38,16 @@ export class AdminProductEditComponent implements OnInit
                 console.log(this.product);
                 this.productForm = new FormGroup(
                 {
-                    tytul: new FormControl(this.product.tytul, Validators.required),
-                    opis: new FormControl(this.product.opis, Validators.required),
-                    catId: new FormControl(this.product.catId, Validators.required)
+                    tytul: new FormControl(this.product.product.tytul, Validators.required),
+                    opis: new FormControl(this.product.product.opis, Validators.required),
+                    catId: new FormControl(this.product.product.catId, Validators.required)
+                });
+
+				this.productTypeForm = new FormGroup(
+                {
+                    title: new FormControl('', Validators.required),
+                    price: new FormControl('', Validators.required),
+                    quantity: new FormControl('', Validators.required)
                 });
             }
         );
