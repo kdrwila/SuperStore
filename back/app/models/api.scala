@@ -9,7 +9,7 @@ case class CategoriesREST(catId: Long, tytul: String, opis: String)
 case class CategoriesPOST(tytul: String, opis: String)
 case class ProductsREST(prodId: Long, tytul: String, opis: String, catId: Long)
 case class ProductsPOST(tytul: String, opis: String, catId: Long)
-case class ProductTypesREST(type_id: Long, title: String, price: Long, quantity: Long, product_id: Long)
+case class ProductTypesREST(type_id: Long, title: String, price: Float, quantity: Long, product_id: Long)
 
 object CategoriesREST 
 {

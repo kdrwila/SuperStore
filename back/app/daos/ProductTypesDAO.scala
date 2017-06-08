@@ -63,7 +63,7 @@ class ProductTypesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 	{
 		def type_id = column[Long]("type_id", O.AutoInc, O.AutoInc)
 		def title = column[String]("title")
-		def price = column[Long]("price")
+		def price = column[Float]("price")
 		def quantity = column[Long]("quantity")
 		def product_id = column[Long]("product_id")
 		def * = (type_id, title, price, quantity, product_id) <> (models.ProductTypes.tupled, models.ProductTypes.unapply)

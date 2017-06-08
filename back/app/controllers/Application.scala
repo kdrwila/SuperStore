@@ -2,19 +2,20 @@ package controllers
 
 import javax.inject.Inject
 
-import daos.ProductsDAO
 import daos.CategoriesDAO
-import models.ProductsREST
-import models.ProductsPOST
+import daos.ProductsDAO
+import daos.ProductTypesDAO
 import models.CategoriesREST
 import models.CategoriesPOST
+import models.ProductsREST
+import models.ProductsPOST
 import models.Products
 import models.Categories
 import play.api.libs.json._
 import play.api.mvc._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
-class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: CategoriesDAO) extends Controller
+class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: CategoriesDAO, productTypesDAO: ProductTypesDAO) extends Controller
 {
 	implicit val categoriesWrites = new Writes[Option[models.Categories]] 
 	{
@@ -50,9 +51,19 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def getproduct(id: Long) = Action.async 
 	{ implicit request =>
+
+		var product : JsValue = Json.obj()
 		productsDAO.get(id) map
-		{
-			products => Ok(Json.toJson(products))
+		{ products => 
+			product = Json.toJson(products)
+		}
+		productTypesDAO.getForProduct(id) map
+		{ types =>
+			Json.toJson(types);
+			Ok(Json.obj(
+				"product" -> product,
+				"types" -> types
+			));
 		}
 	}
 
