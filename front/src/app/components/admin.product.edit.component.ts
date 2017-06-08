@@ -58,4 +58,9 @@ export class AdminProductEditComponent implements OnInit
 	{
 		this.productService.updateProduct(this.productForm.value, this.id);
 	}
+
+	addType(event)
+	{
+		this.productService.addType(this.productTypeForm.value, this.id);
+	}
 }

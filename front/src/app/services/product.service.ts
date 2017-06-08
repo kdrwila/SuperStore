@@ -78,4 +78,21 @@ export class ProductService
 			error => console.error('nie bangla', error)
 		);
 	}
+
+	addType(formData, productId: number)
+	{
+		const serializedForm = JSON.stringify(formData);
+
+		const headers: Headers = new Headers();
+		headers.append('Accept', 'application/json');
+		headers.append('Content-Type', 'application/json');
+
+		const options = new RequestOptions({headers: headers});
+
+		this.http.post('http://localhost:9900/api/product/' + productId + '/type', serializedForm, options).subscribe
+		(
+			data => console.log('wyslane!', data),
+			error => console.error('nie bangla', error)
+		);
+	}
 }
