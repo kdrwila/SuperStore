@@ -41,15 +41,15 @@
             <tr *ngFor="let type of product.types">
                 <td>{{ type.type_id }}</td>
                 <td>{{ type.title }}</td>
-                <td>{{ type.price }} zł</td>
+                <td>{{ type.price | number:'1.2-2' }} zł</td>
                 <td>{{ type.quantity }} szt</td>
                 <td><button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-remove"></i></button></td>
             </tr>
             <tr [hidden]="!addTypeClicked">
                 <td colspan="2"><input id="type_title" formControlName="title" type="text" placeholder="Product type name" class="form-control" /></td>
-                <td><input id="type_price" formControlName="price" type="text" placeholder="Product price in PLN" class="form-control" /></td>
-                <td><input id="type_quantity" formControlName="quantity" type="text" placeholder="Product quantity" class="form-control" /></td>
-                <td><button type="submit" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-save"></i></button></td>
+                <td><input id="type_price" formControlName="price" type="number" placeholder="Product price in PLN" class="form-control" step="0.01" /></td>
+                <td><input id="type_quantity" formControlName="quantity" type="number" placeholder="Product quantity" class="form-control" /></td>
+                <td><button type="submit" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-floppy-disk"></i></button></td>
             </tr>  
             <tr>
                 <td colspan="5"><button type="button" class="btn btn-success btn-xs pull-right" (click)="addTypeClicked = !addTypeClicked"><i class="glyphicon glyphicon-plus"></i></button></td>

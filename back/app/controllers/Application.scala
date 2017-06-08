@@ -9,8 +9,10 @@ import models.CategoriesREST
 import models.CategoriesPOST
 import models.ProductsREST
 import models.ProductsPOST
-import models.Products
+import models.ProductTypesPOST
 import models.Categories
+import models.Products
+import models.ProductTypes
 import play.api.libs.json._
 import play.api.mvc._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
@@ -51,7 +53,6 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def getproduct(id: Long) = Action.async 
 	{ implicit request =>
-
 		var product : JsValue = Json.obj()
 		productsDAO.get(id) map
 		{ products => 
@@ -91,6 +92,14 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 		Ok("")
 	}
 
+	def addproducttype(productId: Long) = Action
+	{ implicit request =>
+		var json: ProductTypesPOST = request.body.asJson.get.as[ProductTypesPOST]
+		var productType = ProductTypes(type_id = 0, title = json.title, price = json.price, quantity = json.quantity, product_id = productId)
+		productTypesDAO.insert(productType)
+		Ok(request.body.asJson.get)
+	}
+
 	def listcategories = Action.async 
 	{ implicit request =>
 		categoriesDAO.all map
@@ -109,7 +118,6 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 
 	def getcategory(id: Long) = Action.async 
 	{ implicit request =>
-
 		var cat : JsValue = Json.obj()
 		categoriesDAO.get(id) map
 		{ category => 
@@ -123,6 +131,5 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 				"products" -> products
 			))
 		}
-
 	}	
 }

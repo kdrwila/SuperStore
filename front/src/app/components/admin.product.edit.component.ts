@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { Product } from '../models/product';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category';
+import { ProductService } from '../services/product.service';
+import { Product } from '../models/product';
+import { ProductType } from '../models/productType';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 
@@ -21,6 +22,7 @@ export class AdminProductEditComponent implements OnInit
 	categories: Category[];
 	productForm: FormGroup;
 	productTypeForm: FormGroup;
+	addTypeClicked: boolean = false;
 
 	constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) { }
 
@@ -35,7 +37,6 @@ export class AdminProductEditComponent implements OnInit
         data =>
             {
                 this.product = data;
-                console.log(this.product);
                 this.productForm = new FormGroup(
                 {
                     tytul: new FormControl(this.product.product.tytul, Validators.required),
@@ -62,5 +63,13 @@ export class AdminProductEditComponent implements OnInit
 	addType(event)
 	{
 		this.productService.addType(this.productTypeForm.value, this.id);
+
+		this.productService.getProduct(this.id).subscribe(
+        data =>
+            this.product = data
+		);
+
+		this.productTypeForm.reset();
+		this.addTypeClicked = false;
 	}
 }

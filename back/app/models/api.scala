@@ -10,6 +10,7 @@ case class CategoriesPOST(tytul: String, opis: String)
 case class ProductsREST(prodId: Long, tytul: String, opis: String, catId: Long)
 case class ProductsPOST(tytul: String, opis: String, catId: Long)
 case class ProductTypesREST(type_id: Long, title: String, price: Float, quantity: Long, product_id: Long)
+case class ProductTypesPOST(title: String, price: Float, quantity: Long)
 
 object CategoriesREST 
 {
@@ -34,4 +35,9 @@ object ProductsPOST
 object ProductTypesREST 
 {
 	implicit val productsFormat = Json.format[ProductTypesREST]
+}
+
+object ProductTypesPOST 
+{
+	implicit val productsFormat = Json.format[ProductTypesPOST]
 }
