@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit
 	id: number;
   	private sub: any;
 	productData: any;
+	selectedTypePrice: number;
 
 	constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -25,10 +26,11 @@ export class ProductComponent implements OnInit
 			this.id = +params['id'];
 		});
 
-		this.productService.getProduct(this.id).subscribe
-		(
-			data => this.productData = data
-		);
+		this.productService.getProduct(this.id).subscribe(data =>
+		{
+			this.productData = data;
+			this.selectedTypePrice = this.productData.types[0].price;
+		});
 	}
 
 	ngOnDestroy() 

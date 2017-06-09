@@ -1,0 +1,55 @@
+.field-label
+{
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: #555;
+    display: block;
+    font-size: 14px;
+}
+
+.product-description 
+{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.product-description .title .text
+{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 0px;
+    display: block;
+}
+
+.product-description .types .type
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #CCC;
+    margin-right: 10px;
+    border-radius: 3px;
+    padding: 6px 12px;
+    color: #888;
+    margin-top: 5px;
+    display: inline-block;
+    transition: border-color 0.3s ease 0s, color 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.product-description .types .type:hover,
+.product-description .types .type.active
+{
+    border-color: #337ab7;
+    color: #337ab7;
+}
+
+.product-description .price .text
+{
+    font-size: 30px;
+    font-weight: bold;
+    color: #337ab7;
+    padding-top: 8px;
+    display: inline-block;
+}

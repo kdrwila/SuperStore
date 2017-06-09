@@ -3,9 +3,32 @@
         <li><a href="/">Strona główna</a></li>
         <li><a href="/categories/">Kategorie</a></li>
         <li><a href="#">Nazwa Kategorii</a></li>
-        <li class="active">{{ productData.tytul }}</li>
-    </ul> 
+        <li class="active">{{ productData.product.tytul }}</li>
+    </ul>
 
-    <h4>{{ productData.tytul }}</h4>
-    <p>{{ productData.opis }}</p>
+    <div class="product-description">
+        <span class="title">
+            <span class="field-label">Tytuł</span>
+            <span class="text">{{ productData.product.tytul }}</span>
+        </span>
+        <span class="types">
+            <span class="field-label">Dostępne typy</span>
+            <span class="type" *ngFor="let type of productData.types" (click)="selectedTypePrice = type.price" [ngClass]="{active: selectedTypePrice == type.price}">
+                {{ type.title }}
+            </span>
+        </span>
+        <span class="price">
+            <span class="field-label">Cena</span>
+            <span class="text">{{ selectedTypePrice | number:'1.2-2' }} zł</span>
+        </span>
+        <span class="buy">
+            <button type="button"><i class="glyphicon glyphicon-shopping-basket"></i> Dodaj</button>
+        </span>
+    </div>
+
+    <hr>
+
+    <p>{{ productData.product.opis }}</p>
+
+    <hr>
 </section>
