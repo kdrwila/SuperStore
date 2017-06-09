@@ -3,7 +3,7 @@
         <li><a href="/">Strona główna</a></li>
         <li><a href="/admin/">Panel administratora</a></li>
         <li><a href="/admin/products">Produkty</a></li>
-        <li class="active">{{ product.tytul }}</li>
+        <li class="active">{{ product.product.tytul }}</li>
     </ul> 
 
     <form [formGroup]="productForm" (ngSubmit)="updateProduct($event)" >
@@ -43,7 +43,7 @@
                 <td>{{ type.title }}</td>
                 <td>{{ type.price | number:'1.2-2' }} zł</td>
                 <td>{{ type.quantity }} szt</td>
-                <td><button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-remove"></i></button></td>
+                <td><button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeType(type.type_id)"><i class="glyphicon glyphicon-remove"></i></button></td>
             </tr>
             <tr [hidden]="!addTypeClicked">
                 <td colspan="2"><input id="type_title" formControlName="title" type="text" placeholder="Product type name" class="form-control" /></td>

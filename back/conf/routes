@@ -5,17 +5,18 @@
 # Home page
 GET     /                           @controllers.Application.index
 
-GET     /api/products               @controllers.Application.listproducts
-GET     /api/product/:id            @controllers.Application.getproduct(id: Long)
-POST    /api/product                @controllers.Application.newproduct
-PUT     /api/product/*id            @controllers.Application.updateproduct(id: Long)
-DELETE  /api/product/*id            @controllers.Application.removeproduct(id: Long)
+GET     /api/products           	@controllers.Application.listproducts
+GET     /api/product/:id        	@controllers.Application.getproduct(id: Long)
+POST    /api/product            	@controllers.Application.newproduct
+PUT     /api/product/:id        	@controllers.Application.updateproduct(id: Long)
+DELETE  /api/product/:id       		@controllers.Application.removeproduct(id: Long)
 
-POST    /api/product/:id/type       @controllers.Application.addproducttype(id: Long)
+POST    /api/product/:id/type   	@controllers.Application.addproducttype(id: Long)
+DELETE  /api/product/:id/type/:t_id	@controllers.Application.removeproducttype(id: Long, t_id: Long)
 
-GET /api/categories                 @controllers.Application.listcategories
-GET /api/category/*id               @controllers.Application.getcategory(id: Long)
-POST /api/category                  @controllers.Application.newcategory
+GET /api/categories             	@controllers.Application.listcategories
+GET /api/category/*id           	@controllers.Application.getcategory(id: Long)
+POST /api/category              	@controllers.Application.newcategory
 # PUT /api/category/*id
 # DELETE /api/category/*id
 
@@ -31,5 +32,5 @@ POST /api/category                  @controllers.Application.newcategory
 # DELETE /api/user/*id
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file               	controllers.Assets.at(path="/public", file)
 

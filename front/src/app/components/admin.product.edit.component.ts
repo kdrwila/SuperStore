@@ -72,4 +72,23 @@ export class AdminProductEditComponent implements OnInit
 		this.productTypeForm.reset();
 		this.addTypeClicked = false;
 	}
+
+	removeType(id: number)
+	{
+		this.productService.removeType(id, this.id);
+
+		var types = this.product.types;
+
+		var i = 0;
+		this.product.types.forEach(function(type: ProductType)
+		{
+			if(type.type_id == id)
+			{
+				types.splice(i, 1);
+			}
+			i ++;
+		});
+
+		this.product.types = types;
+	}
 }
