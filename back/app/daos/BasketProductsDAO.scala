@@ -22,7 +22,7 @@ class BasketProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfig
 		val futureBasketProducts = db.run(results)
 		futureBasketProducts.map(
 			_.map {
-				a => BasketProductsREST(id = a.id, user_id = a.user_id, quantity = a.quantity, product_id = a.product_id)
+				a => BasketProductsREST(id = a.id, user_id = a.user_id, quantity = a.quantity, product_id = a.product_id, type_id = a.type_id)
 			}.toList)
 	}
 
@@ -42,7 +42,7 @@ class BasketProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfig
 		futureBasketProducts.map(
 			_.map
 			{
-				a => BasketProductsREST(id = a.id, user_id = a.user_id, quantity = a.quantity, product_id = a.product_id)
+				a => BasketProductsREST(id = a.id, user_id = a.user_id, quantity = a.quantity, product_id = a.product_id, type_id = a.type_id)
 			}.toList
 		)
 	}
@@ -65,7 +65,8 @@ class BasketProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfig
 		def user_id = column[Long]("user_id")
 		def quantity = column[Long]("quantity")
 		def product_id = column[Long]("product_id")
-		def * = (id, user_id, quantity, product_id) <> (models.BasketProducts.tupled, models.BasketProducts.unapply)
+		def type_id = column[Long]("type_id")
+		def * = (id, user_id, quantity, product_id, type_id) <> (models.BasketProducts.tupled, models.BasketProducts.unapply)
 	}
 
 }
