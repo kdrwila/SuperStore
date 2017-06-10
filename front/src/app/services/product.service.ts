@@ -110,5 +110,4 @@ export class ProductService
 			error => console.error('nie bangla', error)
 		);
 	}
-
 }

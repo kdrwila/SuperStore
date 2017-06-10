@@ -13,6 +13,7 @@ import { CategoryComponent } from '../components/category.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
+import { BasketService } from "../services/basket.service";
 
 
 @NgModule(
@@ -43,7 +44,7 @@ import { CategoryService } from "../services/category.service";
 			{ path: 'moreparams/:tytul/:opis', component: AdminProductComponent }
 		])
 	],
-	providers: [ProductService, CategoryService],
+	providers: [ProductService, CategoryService, BasketService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,16 +13,16 @@
         </span>
         <span class="types">
             <span class="field-label">Dostępne typy</span>
-            <span class="type" *ngFor="let type of productData.types" (click)="selectedTypePrice = type.price" [ngClass]="{active: selectedTypePrice == type.price}">
+            <span class="type" *ngFor="let type of productData.types" (click)="selectedType = type" [ngClass]="{active: selectedType == type}">
                 {{ type.title }}
             </span>
         </span>
         <span class="price">
             <span class="field-label">Cena</span>
-            <span class="text">{{ selectedTypePrice | number:'1.2-2' }} zł</span>
+            <span class="text">{{ selectedType.price | number:'1.2-2' }} zł</span>
         </span>
         <span class="buy">
-            <button type="button"><i class="glyphicon glyphicon-shopping-basket"></i> Dodaj</button>
+            <button type="button" (click)="addProductToBasket(selectedType)"><i class="glyphicon glyphicon-shopping-basket"></i> Dodaj</button>
         </span>
     </div>
 
