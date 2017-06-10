@@ -14,6 +14,8 @@ case class Products(prodId: Long, tytul: String, opis: String, catId: Long)
 
 case class ProductTypes(type_id: Long, title: String, price: Float, quantity: Long, product_id: Long)
 
+case class BasketProducts(id: Long, user_id: Long, quantity: Long, product_id: Long)
+
 //case class Purchases(purId: Long, prodId: Long, userId: Long)
 
 //case class Users(userId: Long, username: String)

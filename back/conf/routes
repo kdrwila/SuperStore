@@ -20,6 +20,9 @@ POST /api/category              	@controllers.Application.newcategory
 # PUT /api/category/*id
 # DELETE /api/category/*id
 
+GET     /api/basket/user/:id        @controllers.Basket.getBasketForUser(id: Long)
+POST	/api/basket					@controllers.Basket.insertBasketProduct
+
 # GET /api/purchases
 # GET /api/purchases/*userid
 # POST /api/purchases/*userid

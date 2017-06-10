@@ -137,5 +137,5 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 				"products" -> products
 			))
 		}
-	}	
+	}
 }
