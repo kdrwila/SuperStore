@@ -58,6 +58,7 @@ export class BasketComponent implements OnInit
 				{
 					if(this.basketProducts[p].id == id)
 					{
+						this.totalCost -= this.basketProducts[p].type_data.price * this.basketProducts[p].quantity;
 						basketProducts.splice(parseInt(p), 1);
 					}
 				}
