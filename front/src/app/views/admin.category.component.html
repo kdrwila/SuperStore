@@ -2,20 +2,38 @@
 	<li><a href="/">Main page</a></li>
 	<li><a href="/admin/">Administrator Panel</a></li>
 	<li class="active">Categories</li>
-</ul> 
+</ul>
 
-<form [formGroup]="categoryForm" (ngSubmit)="addCategory($event)">
+<table class="table table-condensed table-striped table-hover">
+	<tbody>
+		<tr>
+			<th>Category name</th>
+			<th class="text-right">Actions</th>
+		</tr>
+		<tr *ngFor="let category of categories">
+			<td><a href="/admin/category/{{ category.catId }}">{{ category.tytul }}</a></td>
+			<td class="text-right">
+				<a href="/admin/category/{{ category.catId }}" class="btn btn-default btn-xs" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-pencil"></i></a>
+				<button type="button" class="btn btn-danger btn-xs" (click)="removeCategory(product.catId)"><i class="glyphicon glyphicon-remove"></i></button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<hr>
+
+<form [formGroup]="categoryForm" (ngSubmit)="addCategory($event)" [hidden]="!addCategoryClicked">
 	<div class="form-group">
- <label for="tytul">Category title</label><input id="tytul" formControlName="tytul" type="text" placeholder="Category title" class=".form-control">
+		<label for="tytul">Category name</label>
+		<input id="tytul" formControlName="tytul" type="text" placeholder="Category name" class="form-control">
 	</div>
 	<div class="form-group">
-	<label for="opis">Category description</label><textarea id="opis" formControlName="opis" placeholder="Category description" class=".form-control"></textarea>
+		<label for="opis">Category description</label>
+		<textarea id="opis" formControlName="opis" placeholder="Category description" class="form-control"></textarea>
 	</div>
-	<button type="submit">Add Category</button>
+	<button type="submit" class="btn btn-primary pull-right">Add Category</button>
 </form>
 
-<select [(ngModel)]="Category">
-	<ng-container *ngFor="let c of categories">
-			<option [ngValue]="c">{{c.tytul}} ({{c.opis}})</option>
-	</ng-container>
-</select>
+<div [hidden]="addCategoryClicked">
+	<button type="button" class="btn btn-primary pull-right" (click)="addCategoryClicked = !addCategoryClicked">Add New Category</button>
+</div>

@@ -15,6 +15,7 @@ export class AdminCategoryComponent implements OnInit
 {
 	categories: Category[];
 	categoryForm: FormGroup;
+	addCategoryClicked: boolean = false;
 
 	constructor(private categoryService: CategoryService, private route: ActivatedRoute) { }
 
@@ -27,15 +28,13 @@ export class AdminCategoryComponent implements OnInit
 			tytul: new FormControl('tytul', Validators.required),
 			opis: new FormControl('opis', Validators.required)
 		});
-
-		console.log(this.route.snapshot.params);
 	}
 
 	addCategory(event)
 	{
-		console.log(event);
-		console.log(this.categoryForm.value);
 		this.categoryService.sendToPlay(this.categoryForm.value);
+
+		this.addCategoryClicked = false;
 	}
 
 }
