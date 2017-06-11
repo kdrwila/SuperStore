@@ -42,6 +42,16 @@ export class ProductComponent implements OnInit
 
 	addProductToBasket(product: ProductType, amount: number)
 	{
-		this.basketService.addProductToBasket(product, -1, amount);
+		this.basketService.addProductToBasket(product, -1, amount).subscribe
+		(
+			data =>
+			{
+				console.log("dodano");
+			},
+			error =>
+			{
+				console.error('ERROR', error);
+			}
+		);
 	}
 }
