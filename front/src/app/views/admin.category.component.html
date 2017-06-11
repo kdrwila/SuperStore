@@ -1,22 +1,17 @@
 <ul class="breadcrumb">
-	<li><a href="/">Strona główna</a></li>
-	<li><a href="/admin/">Panel administratora</a></li>
-	<li class="active">Kategorie</li>
+	<li><a href="/">Main page</a></li>
+	<li><a href="/admin/">Administrator Panel</a></li>
+	<li class="active">Categories</li>
 </ul> 
-
-<li *ngFor="let category of categories">
-	<div *ngIf="category.opis == 'promocja'">PROMO!</div>
-	{{ category.tytul}} - {{ category.opis }}
-</li>
 
 <form [formGroup]="categoryForm" (ngSubmit)="addCategory($event)">
 	<div class="form-group">
- <label for="tytul">Tytuł</label><input id="tytul" formControlName="tytul" type="text" placeholder="Category name" class=".form-control">
+ <label for="tytul">Category title</label><input id="tytul" formControlName="tytul" type="text" placeholder="Category title" class=".form-control">
 	</div>
 	<div class="form-group">
-	<label for="opis">Opis</label><textarea id="opis" formControlName="opis" placeholder="Category description" class=".form-control"></textarea>
+	<label for="opis">Category description</label><textarea id="opis" formControlName="opis" placeholder="Category description" class=".form-control"></textarea>
 	</div>
-	<button type="submit">Add</button>
+	<button type="submit">Add Category</button>
 </form>
 
 <select [(ngModel)]="Category">

@@ -1,28 +1,28 @@
 <section *ngIf="productData">
     <ul class="breadcrumb">
-        <li><a href="/">Strona główna</a></li>
-        <li><a href="/categories/">Kategorie</a></li>
+        <li><a href="/">Main Page</a></li>
+        <li><a href="/categories/">Categories</a></li>
         <li><a href="#">Nazwa Kategorii</a></li>
         <li class="active">{{ productData.product.tytul }}</li>
     </ul>
 
     <div class="product-description">
         <span class="title">
-            <span class="field-label">Tytuł</span>
+            <span class="field-label">Product name</span>
             <span class="text">{{ productData.product.tytul }}</span>
         </span>
         <span class="types">
-            <span class="field-label">Dostępne typy</span>
+            <span class="field-label">Available types</span>
             <span class="type" *ngFor="let type of productData.types" (click)="selectedType = type" [ngClass]="{active: selectedType == type}">
                 {{ type.title }}
             </span>
         </span>
         <span class="price">
-            <span class="field-label">Cena</span>
-            <span class="text">{{ selectedType.price | number:'1.2-2' }} zł</span>
+            <span class="field-label">Price</span>
+            <span class="text">${{ selectedType.price | number:'1.2-2' }}</span>
         </span>
         <span class="buy">
-            <button type="button" (click)="addProductToBasket(selectedType)"><i class="glyphicon glyphicon-shopping-cart"></i> Dodaj</button>
+            <button type="button" (click)="addProductToBasket(selectedType)"><i class="glyphicon glyphicon-shopping-cart"></i> Add to cart</button>
         </span>
     </div>
 

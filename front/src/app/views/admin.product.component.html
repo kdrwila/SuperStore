@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
-	<li><a href="/">Strona główna</a></li>
-	<li><a href="/admin/">Panel administratora</a></li>
-	<li class="active">Produkty</li>
+	<li><a href="/">Main page</a></li>
+	<li><a href="/admin/">Administrator panel</a></li>
+	<li class="active">Products</li>
 </ul> 
 
 <ul class="list-group">
@@ -15,20 +15,20 @@
 
 <form [formGroup]="productForm" (ngSubmit)="addProduct($event)">
 	<div class="form-group">
-		<label for="tytul">Tytuł</label>
+		<label for="tytul">Product name</label>
 		<input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
 	</div>
 	<div class="form-group">
-		<label for="opis">Opis</label>
+		<label for="opis">Product description</label>
 		<textarea id="opis" formControlName="opis" placeholder="Product description" class="form-control"></textarea>
 	</div>
 	<div class="form-group">
-		<label for="catId">Kategoria</label>
+		<label for="catId">Category</label>
 		<select id="catId" formControlName="catId" class="form-control">
 			<ng-container *ngFor="let c of categories">
 				<option [ngValue]="c.catId">{{c.tytul}}</option>
 			</ng-container>
 		</select>
 	</div>
-	<button type="submit">Add</button>
+	<button type="submit">Add Product</button>
 </form>

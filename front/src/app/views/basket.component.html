@@ -1,4 +1,9 @@
 <section *ngIf="basketProducts">
+    <ul class="breadcrumb">
+        <li><a href="/">Main Page</a></li>
+        <li class="active">Cart</li>
+    </ul> 
+
     <table class="table table-stripped table-hover">
         <tbody>
             <tr>
@@ -18,8 +23,8 @@
                         {{ product.quantity }} pcs.
                         <button type="button" [ngClass]="{disabled: product.quantity >= product.type_data.quantity}" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-plus"></i></button>
                     </td>
-                    <td class="text-right"> {{ product.type_data.price | number:'1.2-2' }} zł</td>
-                    <td class="text-right"> {{ product.type_data.price * product.quantity | number:'1.2-2' }} zł</td>
+                    <td class="text-right"> ${{ product.type_data.price | number:'1.2-2' }}</td>
+                    <td class="text-right"> ${{ product.type_data.price * product.quantity | number:'1.2-2' }}</td>
                     <td class="text-right"><button type="button" class="btn btn-xs btn-danger" (click)="removeProductFromBasket(product.id)"><i class="glyphicon glyphicon-remove"></i></button></td>
                 </template>
             </tr>

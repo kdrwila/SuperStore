@@ -1,29 +1,29 @@
  <section *ngIf="product && categories">
     <ul class="breadcrumb">
-        <li><a href="/">Strona główna</a></li>
-        <li><a href="/admin/">Panel administratora</a></li>
-        <li><a href="/admin/products">Produkty</a></li>
+        <li><a href="/">Main page</a></li>
+        <li><a href="/admin/">Administrator Panel</a></li>
+        <li><a href="/admin/products">Products</a></li>
         <li class="active">{{ product.product.tytul }}</li>
     </ul> 
 
     <form [formGroup]="productForm" (ngSubmit)="updateProduct($event)" >
         <div class="form-group">
-            <label for="tytul">Tytuł</label>
+            <label for="tytul">Product name</label>
             <input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
         </div>
         <div class="form-group">
-            <label for="opis">Opis</label>
+            <label for="opis">Product description</label>
             <textarea id="opis" formControlName="opis" placeholder="Product description" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="catId">Kategoria</label>
+            <label for="catId">Category</label>
             <select id="catId" formControlName="catId" class="form-control">
                 <ng-container *ngFor="let c of categories">
                     <option [ngValue]="c.catId">{{c.tytul}}</option>
                 </ng-container>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Zapisz</button>
+        <button type="submit" class="btn btn-primary">Save product</button>
     </form>
 
     <hr>
@@ -33,21 +33,21 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <th>Typ</th>
-                <th>Cena</th>
-                <th>Ilość</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Quantity</th>
                 <th><span class="pull-right">Akcje</span></th>
             </tr>
             <tr *ngFor="let type of product.types">
                 <td>{{ type.type_id }}</td>
                 <td>{{ type.title }}</td>
-                <td>{{ type.price | number:'1.2-2' }} zł</td>
-                <td>{{ type.quantity }} szt</td>
+                <td>${{ type.price | number:'1.2-2' }}</td>
+                <td>{{ type.quantity }} pcs.</td>
                 <td><button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeType(type.type_id)"><i class="glyphicon glyphicon-remove"></i></button></td>
             </tr>
             <tr [hidden]="!addTypeClicked">
                 <td colspan="2"><input id="type_title" formControlName="title" type="text" placeholder="Product type name" class="form-control" /></td>
-                <td><input id="type_price" formControlName="price" type="number" placeholder="Product price in PLN" class="form-control" step="0.01" /></td>
+                <td><input id="type_price" formControlName="price" type="number" placeholder="Product price in USD" class="form-control" step="0.01" /></td>
                 <td><input id="type_quantity" formControlName="quantity" type="number" placeholder="Product quantity" class="form-control" /></td>
                 <td><button type="submit" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-floppy-disk"></i></button></td>
             </tr>  
