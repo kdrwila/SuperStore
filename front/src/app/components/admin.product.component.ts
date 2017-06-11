@@ -17,6 +17,7 @@ export class AdminProductComponent implements OnInit
 	products: Product[];
 	categories: Category[];
 	productForm: FormGroup;
+	addProductClicked: boolean = false;
 
 	constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) { }
 
@@ -27,9 +28,9 @@ export class AdminProductComponent implements OnInit
 
 		this.productForm = new FormGroup(
 		{
-			tytul: new FormControl('tytul', Validators.required),
-			opis: new FormControl('opis', Validators.required),
-			catId: new FormControl('catId', Validators.required)
+			tytul: new FormControl('Product name', Validators.required),
+			opis: new FormControl('Product description', Validators.required),
+			catId: new FormControl('', Validators.required)
 		});
 
 		console.log(this.route.snapshot.params);
@@ -38,6 +39,7 @@ export class AdminProductComponent implements OnInit
 	addProduct(event) 
 	{
 		this.productService.sendToPlay(this.productForm.value);
+		this.addProductClicked = false;
 	}
 
 	removeProduct(id: number)
@@ -57,5 +59,16 @@ export class AdminProductComponent implements OnInit
 		});
 
 		this.products = products;
+	}
+
+	getCategoryName(id: number)
+	{
+		for(var i in this.categories)
+		{
+			if(this.categories[i].catId == id)
+			{
+				return this.categories[i].tytul;
+			}
+		}
 	}
 }

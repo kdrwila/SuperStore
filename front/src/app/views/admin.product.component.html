@@ -4,16 +4,27 @@
 	<li class="active">Products</li>
 </ul> 
 
-<ul class="list-group">
-	<li class="list-group-item" *ngFor="let product of products">
-		<a href="/admin/product/{{ product.prodId }}"> {{ product.tytul }} </a>
-		<button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-remove"></i></button>
-	</li>
-</ul>
+<table class="table table-condensed table-striped table-hover">
+	<tbody>
+		<tr>
+			<th>Product name</th>
+			<th>Category name</th>
+			<th class="text-right">Actions</th>
+		</tr>
+		<tr *ngFor="let product of products">
+			<td><a href="/admin/product/{{ product.prodId }}">{{ product.tytul }}</a></td>
+			<td>{{ getCategoryName(product.catId) }}</td>
+			<td class="text-right">
+				<a href="/admin/product/{{ product.prodId }}" class="btn btn-default btn-xs" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-pencil"></i></a>
+				<button type="button" class="btn btn-danger btn-xs" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-remove"></i></button>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <hr>
 
-<form [formGroup]="productForm" (ngSubmit)="addProduct($event)">
+<form [formGroup]="productForm" (ngSubmit)="addProduct($event)" [hidden]="!addProductClicked">
 	<div class="form-group">
 		<label for="tytul">Product name</label>
 		<input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
@@ -30,5 +41,9 @@
 			</ng-container>
 		</select>
 	</div>
-	<button type="submit">Add Product</button>
+	<button type="submit" class="btn btn-primary pull-right">Add Product</button>
 </form>
+
+<div [hidden]="addProductClicked">
+	<button type="button" class="btn btn-primary pull-right" (click)="addProductClicked = !addProductClicked">Add New Product</button>
+</div>
