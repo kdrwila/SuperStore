@@ -10,6 +10,7 @@ import { AdminProductEditComponent } from '../components/admin.product.edit.comp
 import { AdminCategoryComponent } from '../components/admin.category.component';
 import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
+import { BasketComponent } from '../components/basket.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
@@ -25,7 +26,8 @@ import { BasketService } from "../services/basket.service";
 		AdminProductEditComponent,
 		AdminCategoryComponent,
 		CategoryComponent,
-		ProductComponent
+		ProductComponent,
+		BasketComponent
 	],
 	imports: 
 	[
@@ -41,6 +43,7 @@ import { BasketService } from "../services/basket.service";
 			{ path: 'admin/categories', component: AdminCategoryComponent },
 			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'product/:id', component: ProductComponent },
+			{ path: 'basket', component: BasketComponent },
 			{ path: 'moreparams/:tytul/:opis', component: AdminProductComponent }
 		])
 	],
