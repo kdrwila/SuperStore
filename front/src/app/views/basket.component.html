@@ -20,7 +20,7 @@
                     </td>
                     <td class="text-right"> {{ product.type_data.price | number:'1.2-2' }} zł</td>
                     <td class="text-right"> {{ product.type_data.price * product.quantity | number:'1.2-2' }} zł</td>
-                    <td class="text-right"><button type="button" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></button></td>
+                    <td class="text-right"><button type="button" class="btn btn-xs btn-danger" (click)="removeProductFromBasket(product.id)"><i class="glyphicon glyphicon-remove"></i></button></td>
                 </template>
             </tr>
         </tbody>

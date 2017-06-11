@@ -44,4 +44,14 @@ export class BasketService
 		);
 	}
 
+	removeProductFromBasket(userId: number, id: number)
+	{
+		const headers: Headers = new Headers();
+		headers.append('Accept', 'application/json');
+		headers.append('Content-Type', 'application/json');
+
+		const options = new RequestOptions({headers: headers});
+
+		return this.http.delete('http://localhost:9900/api/basket/user/' + userId + '/' + id, options);
+	}
 }

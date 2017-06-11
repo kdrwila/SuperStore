@@ -22,6 +22,7 @@ POST /api/category              	@controllers.Application.newcategory
 
 GET     /api/basket/user/:id        @controllers.Basket.getBasketForUser(id: Long)
 POST	/api/basket					@controllers.Basket.insertBasketProduct
+DELETE  /api/basket/user/:u_id/:id  @controllers.Basket.removeBasketProduct(u_id: Long, id: Long)  
 
 # GET /api/purchases
 # GET /api/purchases/*userid

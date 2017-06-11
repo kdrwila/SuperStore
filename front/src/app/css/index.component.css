@@ -29,3 +29,8 @@
     border-width: 1px 1px 2px 1px;
     padding: 1px 5px 0px;
 }
+
+:host >>> .text-bold
+{
+    font-weight: bold;
+}

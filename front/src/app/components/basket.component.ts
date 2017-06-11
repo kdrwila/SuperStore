@@ -25,12 +25,9 @@ export class BasketComponent implements OnInit
 			this.basketProducts = data
 			for(var p in this.basketProducts)
 			{
-				console.log(p);
 				const x = p;
 				this.productService.getProduct(this.basketProducts[p].product_id).subscribe(data =>
 				{
-					console.log(x);
-					console.log(this.basketProducts[x]);
 					this.basketProducts[x].product_data = data.product;
 					for(var t in data.types)
 					{
@@ -49,4 +46,30 @@ export class BasketComponent implements OnInit
 	{
 
   	}
+
+	removeProductFromBasket(id: number)
+	{
+		this.basketService.removeProductFromBasket(-1, id).subscribe
+		(
+			data =>
+			{
+				var basketProducts = this.basketProducts;
+				for(var p in this.basketProducts)
+				{
+					if(this.basketProducts[p].id == id)
+					{
+						basketProducts.splice(parseInt(p), 1);
+					}
+				}
+				this.basketProducts = basketProducts;
+
+				return true;
+			},
+			error =>
+			{
+				console.error('ERROR', error);
+				return false;
+			}
+		);
+	}
 }

@@ -27,4 +27,10 @@ class Basket @Inject() (basketProductsDAO: BasketProductsDAO) extends Controller
 		basketProductsDAO.insert(product)
 		Ok(request.body.asJson.get)
 	}
+
+	def removeBasketProduct(userId: Long, id: Long) = Action
+	{ implicit request =>
+		basketProductsDAO.remove(id)
+		Ok("")
+	}
 }
