@@ -7,6 +7,9 @@ import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import slick.driver.JdbcProfile
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ ExecutionContext, Future }
+import scala.util.Try
+import scala.util.Success
+import scala.util.Failure
 
 class BasketProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
 	extends HasDatabaseConfigProvider[JdbcProfile] {
@@ -47,7 +50,39 @@ class BasketProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfig
 		)
 	}
 
-	def insert(basketProduct: BasketProducts): Future[Unit] = db.run(BasketProducts += basketProduct).map { _ => () }
+	// def insert(basketProduct: BasketProducts): Future[Unit] = 
+	// {
+	// 	db.run(BasketProducts += basketProduct).map { _ => () }
+	// }
+
+	def insert(basketProduct: BasketProducts) (implicit ec: ExecutionContext): Unit = 
+	{
+		val q = BasketProducts.filter(a => a.type_id === basketProduct.type_id && a.user_id === basketProduct.user_id)
+		val result = q.result
+		val futureBasketProduct = db.run(result.headOption.asTry)
+
+		futureBasketProduct.map{ result => 
+			result match 
+			{
+				case Success(product) =>
+				{
+					if(product == None)
+					{
+						db.run(BasketProducts += basketProduct).map { _ => () }
+					}
+					else
+					{
+						val bp = models.BasketProducts(product.get.id, basketProduct.user_id, basketProduct.quantity + product.get.quantity, basketProduct.product_id, basketProduct.type_id)
+
+						db.run {
+							val query = for { p <- BasketProducts if p.id === bp.id && p.user_id === bp.user_id } yield p
+							query.update(bp).map(_ => ())
+						}
+					}
+				}
+			}
+		}
+	}
 
 	def update(basketProduct: BasketProducts): Future[Unit] = db.run {
 		val query = for { p <- BasketProducts if p.id === basketProduct.id } yield p
