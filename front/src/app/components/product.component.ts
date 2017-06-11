@@ -40,8 +40,8 @@ export class ProductComponent implements OnInit
     	this.sub.unsubscribe();
   	}
 
-	addProductToBasket(product: ProductType)
+	addProductToBasket(product: ProductType, amount: number)
 	{
-		this.basketService.addProductToBasket(product, -1);
+		this.basketService.addProductToBasket(product, -1, amount);
 	}
 }

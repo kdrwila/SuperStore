@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../services/basket.service';
 import { ProductService } from '../services/product.service';
 import { BasketProduct } from '../models/basketProduct';
+import { ProductType } from '../models/productType';
 import { ActivatedRoute } from "@angular/router";
 
 @Component(
@@ -63,13 +64,41 @@ export class BasketComponent implements OnInit
 					}
 				}
 				this.basketProducts = basketProducts;
-
-				return true;
 			},
 			error =>
 			{
 				console.error('ERROR', error);
-				return false;
+			}
+		);
+	}
+
+	addProductToBasket(product: BasketProduct, amount: number)
+	{
+		if(	product.quantity + amount > product.type_data.quantity ||
+			product.quantity + amount < 1)
+			return;
+
+		var p: ProductType = new ProductType();
+		p.product_id = product.product_id;
+		p.type_id = product.type_id;
+
+		this.basketService.addProductToBasket(p, -1, amount).subscribe
+		(
+			data =>
+			{
+				var basketProducts = this.basketProducts;
+				for(var p in this.basketProducts)
+				{
+					if(this.basketProducts[p].id == product.id)
+					{
+						this.basketProducts[p].quantity += amount;
+					}
+				}
+				this.basketProducts = basketProducts;
+			},
+			error =>
+			{
+				console.error('ERROR', error);
 			}
 		);
 	}

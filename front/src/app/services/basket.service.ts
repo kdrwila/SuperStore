@@ -21,12 +21,12 @@ export class BasketService
 		return this.http.get('http://localhost:9900/api/basket/user/' + userId, options).map(response => <BasketProduct[]>response.json());
 	}
 
-    addProductToBasket(product: ProductType, userId: number)
+    addProductToBasket(product: ProductType, userId: number, amount: number)
 	{
         const result = JSON.parse
         (
             '{  "user_id":' + userId +', \
-                "quantity":1, \
+                "quantity":' + amount +', \
                 "product_id":' + product.product_id + ', \
                 "type_id":' + product.type_id + '}'
         );
@@ -37,11 +37,7 @@ export class BasketService
 
 		const options = new RequestOptions({headers: headers});
 
-		this.http.post('http://localhost:9900/api/basket', result, options).subscribe
-		(
-			data => console.log('wyslane!', data),
-			error => console.error('nie bangla', error)
-		);
+		return this.http.post('http://localhost:9900/api/basket', result, options);
 	}
 
 	removeProductFromBasket(userId: number, id: number)
