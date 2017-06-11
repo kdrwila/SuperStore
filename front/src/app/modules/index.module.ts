@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from '../components/index.component';
+import { AdminMainComponent } from '../components/admin.main.component';
 import { AdminProductComponent } from '../components/admin.product.component';
 import { AdminProductEditComponent } from '../components/admin.product.edit.component';
 import { AdminCategoryComponent } from '../components/admin.category.component';
@@ -22,6 +23,7 @@ import { BasketService } from "../services/basket.service";
 	declarations: 
 	[
 		AppComponent,
+		AdminMainComponent,
 		AdminProductComponent,
 		AdminProductEditComponent,
 		AdminCategoryComponent,
@@ -38,6 +40,7 @@ import { BasketService } from "../services/basket.service";
 		RouterModule.forRoot(
 		[
 			{ path: '.', component: AppComponent },
+			{ path: 'admin', component: AdminMainComponent },
 			{ path: 'admin/products', component: AdminProductComponent },
 			{ path: 'admin/product/:id', component: AdminProductEditComponent },
 			{ path: 'admin/categories', component: AdminCategoryComponent },
