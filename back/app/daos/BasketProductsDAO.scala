@@ -94,6 +94,16 @@ class BasketProductsDAO @Inject()(protected val dbConfigProvider: DatabaseConfig
 		query.delete.map(_ => ())
 	}
 
+	def removeProduct(id: Long): Future[Unit] = db.run {
+		val query = for { p <- BasketProducts if p.product_id === id } yield p
+		query.delete.map(_ => ())
+	}
+
+	def removeType(id: Long): Future[Unit] = db.run {
+		val query = for { p <- BasketProducts if p.type_id === id } yield p
+		query.delete.map(_ => ())
+	}
+
 	class BasketProductsTable(tag: Tag) extends Table[BasketProducts](tag, "BasketProducts") 
 	{
 		def id = column[Long]("id", O.AutoInc, O.AutoInc)

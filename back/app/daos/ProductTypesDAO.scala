@@ -59,6 +59,12 @@ class ProductTypesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 		query.delete.map(_ => ())
 	}
 
+	def removeAllFromProd(id: Long): Future[Unit] = db.run
+	{
+		val query = for { p <- ProductTypes if p.product_id === id } yield p
+		query.delete.map(_ => ())
+	}
+
 	class ProductTypesTable(tag: Tag) extends Table[ProductTypes](tag, "ProductTypes") 
 	{
 		def type_id = column[Long]("type_id", O.AutoInc, O.AutoInc)

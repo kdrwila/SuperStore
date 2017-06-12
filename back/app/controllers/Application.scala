@@ -5,6 +5,7 @@ import javax.inject.Inject
 import daos.CategoriesDAO
 import daos.ProductsDAO
 import daos.ProductTypesDAO
+import daos.BasketProductsDAO
 import models.CategoriesREST
 import models.CategoriesPOST
 import models.ProductsREST
@@ -17,7 +18,7 @@ import play.api.libs.json._
 import play.api.mvc._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
-class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: CategoriesDAO, productTypesDAO: ProductTypesDAO) extends Controller
+class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: CategoriesDAO, productTypesDAO: ProductTypesDAO, basketProductsDAO: BasketProductsDAO) extends Controller
 {	
 	implicit val productsWrites = new Writes[Option[models.Products]] 
 	{
@@ -89,6 +90,10 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 	def removeproduct(id: Long) = Action
 	{ implicit request =>
 		productsDAO.remove(id)
+
+		productTypesDAO.removeAllFromProd(id)
+		basketProductsDAO.removeProduct(id)
+
 		Ok("")
 	}
 
@@ -103,6 +108,8 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 	def removeproducttype(p_id: Long, id: Long) = Action
 	{ implicit request =>
 		productTypesDAO.remove(id)
+		basketProductsDAO.removeType(id)
+
 		Ok("")
 	}
 }
