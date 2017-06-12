@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from "../components/index.component";
 import { BasketService } from '../services/basket.service';
 import { ProductService } from '../services/product.service';
 import { BasketProduct } from '../models/basketProduct';
@@ -14,7 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 
 export class BasketComponent implements OnInit 
 {
-	constructor(private basketService: BasketService, private productService: ProductService, private route: ActivatedRoute) { }
+	constructor(private basketService: BasketService, private productService: ProductService, private route: ActivatedRoute, private index: AppComponent) { }
 
 	basketProducts: BasketProduct[];
 	totalCost: number = 0;
@@ -61,6 +62,7 @@ export class BasketComponent implements OnInit
 					{
 						this.totalCost -= this.basketProducts[p].type_data.price * this.basketProducts[p].quantity;
 						basketProducts.splice(parseInt(p), 1);
+						this.index.cartItemCount -= 1;
 					}
 				}
 				this.basketProducts = basketProducts;

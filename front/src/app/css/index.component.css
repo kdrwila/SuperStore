@@ -34,3 +34,12 @@
 {
     font-weight: bold;
 }
+
+.badge
+{
+    right: 6px;
+    position: relative;
+    font-size: 10px;
+    background-color: #CCC;
+    bottom: -4px;
+}

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from "../components/index.component";
 import { ProductService } from '../services/product.service';
 import { BasketService } from '../services/basket.service';
+import { CategoryService } from '../services/category.service';
 import { Product } from '../models/product';
-import { ProductType } from '../models/productType'
+import { ProductType } from '../models/productType';
+import { Category } from '../models/Category';
 import { ActivatedRoute } from "@angular/router";
 
 @Component(
@@ -18,8 +21,9 @@ export class ProductComponent implements OnInit
   	private sub: any;
 	productData: any;
 	selectedType: ProductType;
+	categories: Category[];
 
-	constructor(private productService: ProductService, private basketService: BasketService, private route: ActivatedRoute) { }
+	constructor(private productService: ProductService, private basketService: BasketService, private categoryService: CategoryService, private route: ActivatedRoute, private index: AppComponent) { }
 
 	ngOnInit() 
 	{
@@ -33,6 +37,8 @@ export class ProductComponent implements OnInit
 			this.productData = data;
 			this.selectedType = this.productData.types[0];
 		});
+
+		this.categoryService.getCategories().subscribe(data => this.categories = data);
 	}
 
 	ngOnDestroy() 
@@ -46,12 +52,23 @@ export class ProductComponent implements OnInit
 		(
 			data =>
 			{
-				console.log("dodano");
+				this.index.cartItemCount += 1;
 			},
 			error =>
 			{
 				console.error('ERROR', error);
 			}
 		);
+	}
+
+	getCategoryName(id: number)
+	{
+		for(var i in this.categories)
+		{
+			if(this.categories[i].catId == id)
+			{
+				return this.categories[i].tytul;
+			}
+		}
 	}
 }
