@@ -57,7 +57,7 @@ class Category @Inject() (categoriesDAO: CategoriesDAO, productsDAO: ProductsDAO
 
     def removeCategory(id: Long) = Action
 	{ implicit request =>
-		productsDAO.remove(id)
+		categoriesDAO.remove(id)
 		Ok("")
 	}
 }
