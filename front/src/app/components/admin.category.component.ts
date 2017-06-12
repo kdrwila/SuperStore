@@ -37,4 +37,27 @@ export class AdminCategoryComponent implements OnInit
 		this.addCategoryClicked = false;
 	}
 
+	removeCategory(id: number)
+	{
+		this.categoryService.removeCategory(id).subscribe
+		(
+			data =>
+			{
+				var basketProducts = this.categories;
+				for(var p in this.categories)
+				{
+					if(this.categories[p].catId == id)
+					{
+						basketProducts.splice(parseInt(p), 1);
+					}
+				}
+				this.categories = basketProducts;
+			},
+			error =>
+			{
+				console.error('ERROR', error);
+			}
+		);
+	}
+
 }

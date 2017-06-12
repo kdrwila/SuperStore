@@ -13,8 +13,8 @@
 		<tr *ngFor="let category of categories">
 			<td><a href="/admin/category/{{ category.catId }}">{{ category.tytul }}</a></td>
 			<td class="text-right">
-				<a href="/admin/category/{{ category.catId }}" class="btn btn-default btn-xs" (click)="removeProduct(product.prodId)"><i class="glyphicon glyphicon-pencil"></i></a>
-				<button type="button" class="btn btn-danger btn-xs" (click)="removeCategory(product.catId)"><i class="glyphicon glyphicon-remove"></i></button>
+				<a href="/admin/category/{{ category.catId }}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+				<button type="button" class="btn btn-danger btn-xs" (click)="removeCategory(category.catId)"><i class="glyphicon glyphicon-remove"></i></button>
 			</td>
 		</tr>
 	</tbody>

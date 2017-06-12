@@ -40,6 +40,11 @@ class CategoriesDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
 
 	def insert(category: Categories): Future[Unit] = db.run(Categories += category).map { _ => () }
 
+	def remove(id: Long): Future[Unit] = db.run {
+		val query = for { c <- Categories if c.catId === id } yield c
+		query.delete.map(_ => ())
+	}
+
 	class CategoriesTable(tag: Tag) extends Table[Categories](tag, "Categories") 
 	{
 		def catId = column[Long]("catId", O.AutoInc, O.AutoInc)
