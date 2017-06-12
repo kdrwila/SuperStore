@@ -94,6 +94,7 @@ export class BasketComponent implements OnInit
 					if(this.basketProducts[p].id == product.id)
 					{
 						this.basketProducts[p].quantity += amount;
+						this.totalCost += this.basketProducts[p].type_data.price * amount;
 					}
 				}
 				this.basketProducts = basketProducts;
