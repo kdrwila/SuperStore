@@ -42,21 +42,30 @@ class Application @Inject() (productsDAO: ProductsDAO, categoriesDAO: Categories
 		}
 	}
 
-	def getproduct(id: Long) = Action.async 
+	def getproduct(id: Long) = Action
 	{ implicit request =>
 		var product : JsValue = Json.obj()
+		var type_r : JsValue = Json.obj()
 		productsDAO.get(id) map
-		{ products => 
+		{ products =>
 			product = Json.toJson(products)
+			productTypesDAO.getForProduct(id) map
+			{ types =>
+				type_r = Json.toJson(types)
+			}
 		}
-		productTypesDAO.getForProduct(id) map
-		{ types =>
-			Json.toJson(types);
-			Ok(Json.obj(
-				"product" -> product,
-				"types" -> types
-			));
+
+		val MAX_ITERATIONS = 1000000
+		var i = 0
+		while(type_r.toString().length() < 3 && i < MAX_ITERATIONS)
+		{ 
+			i += 1
 		}
+
+		Ok(Json.obj(
+			"product" -> product,
+			"types" -> type_r
+		));
 	}
 
 	def newproduct = Action 

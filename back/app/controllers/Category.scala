@@ -38,21 +38,31 @@ class Category @Inject() (categoriesDAO: CategoriesDAO, productsDAO: ProductsDAO
 		Ok(request.body.asJson.get)
 	}
 
-	def getCategory(id: Long) = Action.async 
+	def getCategory(id: Long) = Action
 	{ implicit request =>
 		var cat : JsValue = Json.obj()
+		var product: JsValue = Json.obj()
+
 		categoriesDAO.get(id) map
 		{ category => 
 			cat = Json.toJson(category)
+			productsDAO.getFromCat(id) map
+			{ products => 
+				product = Json.toJson(products)
+			}
 		}
-		productsDAO.getFromCat(id) map
-		{ products => 
-			Json.toJson(products)
-			Ok(Json.obj(
-				"category" -> cat,
-				"products" -> products
-			))
+
+		val MAX_ITERATIONS = 1000000
+		var i = 0
+		while(product.toString().length() < 3 && i < MAX_ITERATIONS)
+		{ 
+			i += 1
 		}
+
+		Ok(Json.obj(
+			"category" -> cat,
+			"products" -> product
+		))
 	}
 
     def removeCategory(id: Long) = Action
