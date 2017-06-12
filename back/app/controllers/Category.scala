@@ -67,7 +67,24 @@ class Category @Inject() (categoriesDAO: CategoriesDAO, productsDAO: ProductsDAO
 
     def removeCategory(id: Long) = Action
 	{ implicit request =>
-		categoriesDAO.remove(id)
+		// categoriesDAO.remove(id)
+
+		var products_r : List[models.ProductsREST] = Nil
+		
+		productsDAO.getFromCat(id) map
+		{ products =>
+			products_r = products
+
+			products_r.foreach
+			{ a => 
+				productTypesDAO.removeAllFromCat(id)
+			}
+		}
+
+		
+
+		// productsDAO.removeAllFromCat(id)
+
 		Ok("")
 	}
 }
