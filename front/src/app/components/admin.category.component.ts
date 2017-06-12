@@ -25,15 +25,23 @@ export class AdminCategoryComponent implements OnInit
 
 		this.categoryForm = new FormGroup(
 		{
-			tytul: new FormControl('tytul', Validators.required),
-			opis: new FormControl('opis', Validators.required)
+			tytul: new FormControl('', Validators.required),
+			opis: new FormControl('', Validators.required)
 		});
 	}
 
 	addCategory(event)
 	{
-		this.categoryService.sendToPlay(this.categoryForm.value);
+		this.categoryService.sendToPlay(this.categoryForm.value).subscribe
+		(
+			data =>
+			{
+				this.categoryService.getCategories().subscribe(data => this.categories = data);
+			},
+			error => console.error('ERROR', error)
+		);
 
+		this.categoryForm.reset();
 		this.addCategoryClicked = false;
 	}
 

@@ -44,12 +44,7 @@ export class CategoryService {
 
 		const options = new RequestOptions({headers: headers});
 
-		this.http.post('http://localhost:9900/api/category', serializedForm, options)
-		.subscribe
-		(
-			data => console.log('wyslane!', data),
-			error => console.error('nie bangla', error)
-		);
+		return this.http.post('http://localhost:9900/api/category', serializedForm, options);
 	}
 
 	removeCategory(id: number)

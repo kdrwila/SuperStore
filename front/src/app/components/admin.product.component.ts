@@ -28,15 +28,24 @@ export class AdminProductComponent implements OnInit
 
 		this.productForm = new FormGroup(
 		{
-			tytul: new FormControl('Product name', Validators.required),
-			opis: new FormControl('Product description', Validators.required),
+			tytul: new FormControl('', Validators.required),
+			opis: new FormControl('', Validators.required),
 			catId: new FormControl('', Validators.required)
 		});
 	}
 
 	addProduct(event) 
 	{
-		this.productService.sendToPlay(this.productForm.value);
+		this.productService.sendToPlay(this.productForm.value).subscribe
+		(
+			data =>
+			{
+				this.productService.getProducts().subscribe(data => this.products = data);
+			},
+			error => console.error('ERROR', error)
+		);
+
+		this.productForm.reset();
 		this.addProductClicked = false;
 	}
 

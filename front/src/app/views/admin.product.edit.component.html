@@ -6,26 +6,30 @@
         <li class="active">{{ product.product.tytul }}</li>
     </ul> 
 
-    <form [formGroup]="productForm" (ngSubmit)="updateProduct($event)" >
-        <div class="form-group">
-            <label for="tytul">Product name</label>
-            <input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
+    <div class="row">
+        <div class="col-xs-12">
+            <form [formGroup]="productForm" (ngSubmit)="updateProduct($event)" >
+                <div class="form-group">
+                    <label for="tytul">Product name</label>
+                    <input id="tytul" formControlName="tytul" type="text" placeholder="Product name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="opis">Product description</label>
+                    <textarea id="opis" formControlName="opis" placeholder="Product description" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="catId">Category</label>
+                    <select id="catId" formControlName="catId" class="form-control">
+                        <ng-container *ngFor="let c of categories">
+                            <option [ngValue]="c.catId">{{c.tytul}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">Save product</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="opis">Product description</label>
-            <textarea id="opis" formControlName="opis" placeholder="Product description" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="catId">Category</label>
-            <select id="catId" formControlName="catId" class="form-control">
-                <ng-container *ngFor="let c of categories">
-                    <option [ngValue]="c.catId">{{c.tytul}}</option>
-                </ng-container>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Save product</button>
-    </form>
-
+    </div>
+    
     <hr>
 
     <form [formGroup]="productTypeForm" (ngSubmit)="addType($event)">

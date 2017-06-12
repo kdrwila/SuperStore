@@ -62,11 +62,13 @@ export class AdminProductEditComponent implements OnInit
 
 	addType(event)
 	{
-		this.productService.addType(this.productTypeForm.value, this.id);
-
-		this.productService.getProduct(this.id).subscribe(
-        data =>
-            this.product = data
+		this.productService.addType(this.productTypeForm.value, this.id).subscribe
+		(
+			data =>
+			{
+				this.productService.getProduct(this.id).subscribe(data => this.product = data);
+			},
+			error => console.error('ERROR', error)
 		);
 
 		this.productTypeForm.reset();
