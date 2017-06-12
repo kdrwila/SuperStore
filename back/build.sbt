@@ -9,9 +9,9 @@ scalaVersion := "2.11.7"
 libraryDependencies ++= Seq( cache , filters, ws   , specs2 % Test )
 
 libraryDependencies ++= Seq(
+  "mysql" % "mysql-connector-java" % "5.1.34",
   "com.typesafe.play" %% "play-slick" % "1.1.1",
-  "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
-  "org.xerial" % "sqlite-jdbc" % "3.8.10.1")
+  "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1")
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
