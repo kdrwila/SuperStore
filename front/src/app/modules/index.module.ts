@@ -17,7 +17,6 @@ import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
 import { BasketService } from "../services/basket.service";
 
-
 @NgModule(
 {
 	declarations: 

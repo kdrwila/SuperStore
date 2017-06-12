@@ -2,7 +2,7 @@
     <ul class="breadcrumb">
         <li><a href="/">Main Page</a></li>
         <li><a href="/categories/">Categories</a></li>
-        <li><a href="#">Nazwa Kategorii</a></li>
+        <li><a href="/category/{{ productData.product.catId }}">{{ getCategoryName(productData.product.catId) }}</a></li>
         <li class="active">{{ productData.product.tytul }}</li>
     </ul>
 

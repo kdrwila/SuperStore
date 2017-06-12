@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component(
 {
-	selector: 'app-product',
+	selector: 'app-admin-category',
 	templateUrl: '../views/admin.category.component.html',
 	styleUrls: ['../css/category.component.css']
 })

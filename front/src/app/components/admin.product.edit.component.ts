@@ -9,7 +9,7 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component(
 {
-	selector: 'app-product',
+	selector: 'app-admin-product-edit',
 	templateUrl: '../views/admin.product.edit.component.html',
 	styleUrls: ['../css/product.component.css']
 })

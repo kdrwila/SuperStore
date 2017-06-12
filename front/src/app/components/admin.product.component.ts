@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 
 @Component(
 {
-	selector: 'app-product',
+	selector: 'app-admin-product',
 	templateUrl: '../views/admin.product.component.html',
 	styleUrls: ['../css/product.component.css']
 })
@@ -32,8 +32,6 @@ export class AdminProductComponent implements OnInit
 			opis: new FormControl('Product description', Validators.required),
 			catId: new FormControl('', Validators.required)
 		});
-
-		console.log(this.route.snapshot.params);
 	}
 
 	addProduct(event) 
