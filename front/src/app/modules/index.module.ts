@@ -9,6 +9,7 @@ import { AdminMainComponent } from '../components/admin.main.component';
 import { AdminProductComponent } from '../components/admin.product.component';
 import { AdminProductEditComponent } from '../components/admin.product.edit.component';
 import { AdminCategoryComponent } from '../components/admin.category.component';
+import { AdminCategoryEditComponent } from '../components/admin.category.edit.component';
 import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
 import { BasketComponent } from '../components/basket.component';
@@ -26,6 +27,7 @@ import { BasketService } from "../services/basket.service";
 		AdminProductComponent,
 		AdminProductEditComponent,
 		AdminCategoryComponent,
+		AdminCategoryEditComponent,
 		CategoryComponent,
 		ProductComponent,
 		BasketComponent
@@ -43,6 +45,7 @@ import { BasketService } from "../services/basket.service";
 			{ path: 'admin/products', component: AdminProductComponent },
 			{ path: 'admin/product/:id', component: AdminProductEditComponent },
 			{ path: 'admin/categories', component: AdminCategoryComponent },
+			{ path: 'admin/category/:id', component: AdminCategoryEditComponent },
 			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'product/:id', component: ProductComponent },
 			{ path: 'basket', component: BasketComponent },

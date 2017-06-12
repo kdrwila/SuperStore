@@ -1,0 +1,24 @@
+ <section *ngIf="category">
+    <ul class="breadcrumb">
+        <li><a href="/">Main page</a></li>
+        <li><a href="/admin/">Administrator Panel</a></li>
+        <li><a href="/admin/categories">Categories</a></li>
+        <li class="active">{{ category.category.tytul }}</li>
+    </ul> 
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form [formGroup]="categoryForm" (ngSubmit)="updateCategory($event)" >
+                <div class="form-group">
+                    <label for="tytul">Category title</label>
+                    <input id="tytul" formControlName="tytul" type="text" placeholder="Category title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="opis">Category description</label>
+                    <textarea id="opis" formControlName="opis" placeholder="Category description" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right">Save category</button>
+            </form>
+        </div>
+    </div>
+</section>

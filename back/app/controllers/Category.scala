@@ -87,4 +87,13 @@ class Category @Inject() (categoriesDAO: CategoriesDAO, productsDAO: ProductsDAO
 
 		Ok("")
 	}
+
+	def updateCategory(id: Long) = Action
+	{ implicit request =>
+		var json: CategoriesPOST = request.body.asJson.get.as[CategoriesPOST]
+		var category = Categories(catId = id, tytul = json.tytul, opis = json.opis)
+
+		categoriesDAO.update(category)
+		Ok(request.body.asJson.get)
+	}
 }

@@ -14,10 +14,10 @@ DELETE  /api/product/:id       		@controllers.Application.removeproduct(id: Long
 POST    /api/product/:id/type   	@controllers.Application.addproducttype(id: Long)
 DELETE  /api/product/:id/type/:t_id	@controllers.Application.removeproducttype(id: Long, t_id: Long)
 
-GET /api/categories             	@controllers.Category.listCategories
-GET /api/category/*id           	@controllers.Category.getCategory(id: Long)
-POST /api/category              	@controllers.Category.addCategory
-# PUT /api/category/*id
+GET     /api/categories             @controllers.Category.listCategories
+GET     /api/category/*id           @controllers.Category.getCategory(id: Long)
+POST    /api/category              	@controllers.Category.addCategory
+PUT     /api/category/:id			@controllers.Category.updateCategory(id: Long)
 DELETE  /api/category/:id           @controllers.Category.removeCategory(id: Long)
 
 GET     /api/basket/user/:id        @controllers.Basket.getBasketForUser(id: Long)
