@@ -13,10 +13,19 @@ import { AdminCategoryEditComponent } from '../components/admin.category.edit.co
 import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
 import { BasketComponent } from '../components/basket.component';
+import { SignInComponent } from '../components/sign.in.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
 import { BasketService } from "../services/basket.service";
+
+import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
+
+export const GOOGLE_CLIENT_ID = '******************************.apps.googleusercontent.com';
+export class MyAuthConfig extends CustomConfig {
+    defaultHeaders = {'Content-Type': 'application/json'};
+    providers = {google: {clientId: GOOGLE_CLIENT_ID}};
+}
 
 @NgModule(
 {
@@ -30,7 +39,8 @@ import { BasketService } from "../services/basket.service";
 		AdminCategoryEditComponent,
 		CategoryComponent,
 		ProductComponent,
-		BasketComponent
+		BasketComponent,
+		SignInComponent
 	],
 	imports: 
 	[
@@ -38,6 +48,7 @@ import { BasketService } from "../services/basket.service";
 		HttpModule,
 		FormsModule,
 		ReactiveFormsModule,
+		Ng2UiAuthModule.forRoot(MyAuthConfig),
 		RouterModule.forRoot(
 		[
 			{ path: '.', component: AppComponent },
@@ -49,7 +60,7 @@ import { BasketService } from "../services/basket.service";
 			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'product/:id', component: ProductComponent },
 			{ path: 'basket', component: BasketComponent },
-			{ path: 'moreparams/:tytul/:opis', component: AdminProductComponent }
+			{ path: 'signin', component: SignInComponent}
 		])
 	],
 	providers: [ProductService, CategoryService, BasketService],

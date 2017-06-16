@@ -4,6 +4,7 @@ import { BasketService } from '../services/basket.service';
 import { Category } from '../models/category';
 import { ProductComponent } from "../components/product.component";
 import { indexProvider } from "../providers/index.provider";
+import { JwtHttp, AuthService } from 'ng2-ui-auth';
 
 @Component({
 	selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit
 	@Input()
 	cartItemCount: number = 1;
 
-	constructor(private categoryService: CategoryService, private basketService: BasketService) { }
+	constructor(private categoryService: CategoryService, private basketService: BasketService, private auth: AuthService) { }
 
 	ngOnInit() 
 	{
@@ -28,5 +29,10 @@ export class AppComponent implements OnInit
 		{
 			this.cartItemCount = data.length;
 		});
+	}
+
+	isAuthenticated()
+	{
+		return this.auth.isAuthenticated();
 	}
 }
