@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { JwtHttp, AuthService } from 'ng2-ui-auth';
 
 @Component(
 {
@@ -10,10 +11,20 @@ import { ActivatedRoute } from "@angular/router";
 
 export class SignInComponent implements OnInit 
 {
-	constructor() { }
+	constructor(private auth: AuthService, private router: Router) { }
 
 	ngOnInit() 
 	{
 		
 	}
+
+	authenticate(provider) 
+	{
+		console.log("works");
+		this.auth.authenticate(provider).subscribe(
+		{
+			error: (err: any) => console.log(err),
+			complete: () => this.router.navigateByUrl('')
+		});
+  	};
 }

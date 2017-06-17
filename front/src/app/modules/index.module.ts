@@ -14,6 +14,7 @@ import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
 import { BasketComponent } from '../components/basket.component';
 import { SignInComponent } from '../components/sign.in.component';
+import { AuthenticateComponent } from '../components/authenticate.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
@@ -21,10 +22,17 @@ import { BasketService } from "../services/basket.service";
 
 import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
 
-export const GOOGLE_CLIENT_ID = '******************************.apps.googleusercontent.com';
+export const GOOGLE_CLIENT_ID = '642191352132-q9084r0rvd2f35jj3hue910e1orne2a2.apps.googleusercontent.com';
 export class MyAuthConfig extends CustomConfig {
     defaultHeaders = {'Content-Type': 'application/json'};
-    providers = {google: {clientId: GOOGLE_CLIENT_ID}};
+    providers = 
+	{
+		google: 
+		{
+			clientId: GOOGLE_CLIENT_ID,
+			url: 'http://localhost:9900/authenticate/google'
+		}
+	};
 }
 
 @NgModule(
@@ -40,7 +48,8 @@ export class MyAuthConfig extends CustomConfig {
 		CategoryComponent,
 		ProductComponent,
 		BasketComponent,
-		SignInComponent
+		SignInComponent,
+		AuthenticateComponent
 	],
 	imports: 
 	[
@@ -60,7 +69,8 @@ export class MyAuthConfig extends CustomConfig {
 			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'product/:id', component: ProductComponent },
 			{ path: 'basket', component: BasketComponent },
-			{ path: 'signin', component: SignInComponent}
+			{ path: 'signin', component: SignInComponent },
+			{ path: 'authenticate/:provider', component: AuthenticateComponent }
 		])
 	],
 	providers: [ProductService, CategoryService, BasketService],

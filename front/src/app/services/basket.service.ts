@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { Product } from "../models/product";
 import { ProductType } from "../models/productType";
-import { BasketProduct } from "../models/BasketProduct";
+import { BasketProduct } from "../models/basketProduct";
 import 'rxjs/add/operator/map';
 
 @Injectable()

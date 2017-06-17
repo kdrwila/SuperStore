@@ -5,7 +5,7 @@ import { BasketService } from '../services/basket.service';
 import { CategoryService } from '../services/category.service';
 import { Product } from '../models/product';
 import { ProductType } from '../models/productType';
-import { Category } from '../models/Category';
+import { Category } from '../models/category';
 import { ActivatedRoute } from "@angular/router";
 
 @Component(
