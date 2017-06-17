@@ -2,39 +2,24 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                           @controllers.Application.index
+GET         /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
+POST        /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
 
-GET     /api/products           	@controllers.Application.listproducts
-GET     /api/product/:id        	@controllers.Application.getproduct(id: Long)
-POST    /api/product            	@controllers.Application.newproduct
-PUT     /api/product/:id        	@controllers.Application.updateproduct(id: Long)
-DELETE  /api/product/:id       		@controllers.Application.removeproduct(id: Long)
+GET         /api/products           	    @controllers.Application.listproducts
+GET         /api/product/:id        	    @controllers.Application.getproduct(id: Long)
+POST        /api/product            	    @controllers.Application.newproduct
+PUT         /api/product/:id        	    @controllers.Application.updateproduct(id: Long)
+DELETE      /api/product/:id       		    @controllers.Application.removeproduct(id: Long)
 
-POST    /api/product/:id/type   	@controllers.Application.addproducttype(id: Long)
-DELETE  /api/product/:id/type/:t_id	@controllers.Application.removeproducttype(id: Long, t_id: Long)
+POST        /api/product/:id/type   	    @controllers.Application.addproducttype(id: Long)
+DELETE      /api/product/:id/type/:t_id	    @controllers.Application.removeproducttype(id: Long, t_id: Long)
 
-GET     /api/categories             @controllers.Category.listCategories
-GET     /api/category/*id           @controllers.Category.getCategory(id: Long)
-POST    /api/category              	@controllers.Category.addCategory
-PUT     /api/category/:id			@controllers.Category.updateCategory(id: Long)
-DELETE  /api/category/:id           @controllers.Category.removeCategory(id: Long)
+GET         /api/categories                 @controllers.Category.listCategories
+GET         /api/category/*id               @controllers.Category.getCategory(id: Long)
+POST        /api/category              	    @controllers.Category.addCategory
+PUT         /api/category/:id			    @controllers.Category.updateCategory(id: Long)
+DELETE      /api/category/:id               @controllers.Category.removeCategory(id: Long)
 
-GET     /api/basket/user/:id        @controllers.Basket.getBasketForUser(id: Long)
-POST	/api/basket					@controllers.Basket.insertBasketProduct
-DELETE  /api/basket/user/:u_id/:id  @controllers.Basket.removeBasketProduct(u_id: Long, id: Long)  
-
-# GET /api/purchases
-# GET /api/purchases/*userid
-# POST /api/purchases/*userid
-# DELETE /api/purchases/*userid
-
-# GET /api/users
-# GET /api/user/*userid
-# POST /api/user
-# PUT /api/user/*id
-# DELETE /api/user/*id
-
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               	controllers.Assets.at(path="/public", file)
-
+GET         /api/basket/user/:id            @controllers.Basket.getBasketForUser(id: Long)
+POST	    /api/basket					    @controllers.Basket.insertBasketProduct
+DELETE      /api/basket/user/:u_id/:id      @controllers.Basket.removeBasketProduct(u_id: Long, id: Long) 

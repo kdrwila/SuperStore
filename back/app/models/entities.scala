@@ -5,8 +5,8 @@ import java.sql.Timestamp
 import play.api.libs.json.Format
 
 /**
-  * Created by kprzystalski on 23/04/17.
-  */
+ * Created by kprzystalski on 23/04/17.
+ */
 
 case class Categories(catId: Long, tytul: String, opis: String)
 
