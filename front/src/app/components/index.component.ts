@@ -20,6 +20,7 @@ export class AppComponent implements OnInit
 	categories: Category[];
 	@Input()
 	cartItemCount: number = 1;
+	user: any;
 
 	constructor(private categoryService: CategoryService, private basketService: BasketService, private auth: AuthService, private userService: UserService) { }
 
@@ -35,7 +36,8 @@ export class AppComponent implements OnInit
 
 		this.userService.getUser().subscribe(data =>
 		{
-			console.log(data);
+			this.user = data;
+			this.user = JSON.parse(this.user._body);
 		},
 		err =>{
 			console.error(err);
