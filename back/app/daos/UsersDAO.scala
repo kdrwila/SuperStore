@@ -16,7 +16,7 @@ import scala.util.Failure
  */
 
 class UsersDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
-  extends HasDatabaseConfigProvider[JdbcProfile] {
+    extends HasDatabaseConfigProvider[JdbcProfile] {
 
   import driver.api._
 

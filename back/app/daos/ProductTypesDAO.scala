@@ -9,7 +9,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ ExecutionContext, Future }
 
 class ProductTypesDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
-  extends HasDatabaseConfigProvider[JdbcProfile] {
+    extends HasDatabaseConfigProvider[JdbcProfile] {
 
   import driver.api._
 
@@ -23,7 +23,8 @@ class ProductTypesDAO @Inject() (protected val dbConfigProvider: DatabaseConfigP
       futureProducts.map(
         _.map {
         a => ProductTypesREST(type_id = a.type_id, title = a.title, price = a.price, quantity = a.quantity, product_id = a.product_id)
-      }.toList)
+      }.toList
+      )
     }
 
   def get(id: Long): Future[Option[ProductTypes]] =

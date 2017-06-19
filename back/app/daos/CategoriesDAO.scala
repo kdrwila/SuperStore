@@ -13,7 +13,7 @@ import scala.concurrent.{ ExecutionContext, Future }
  */
 
 class CategoriesDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
-  extends HasDatabaseConfigProvider[JdbcProfile] {
+    extends HasDatabaseConfigProvider[JdbcProfile] {
 
   import driver.api._
 

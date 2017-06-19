@@ -25,8 +25,9 @@ class ApplicationController @Inject() (
   val messagesApi: MessagesApi,
   silhouette: Silhouette[DefaultEnv],
   socialProviderRegistry: SocialProviderRegistry,
-  usersDAO: UsersDAO)
-  extends Controller with I18nSupport {
+  usersDAO: UsersDAO
+)
+    extends Controller with I18nSupport {
 
   implicit val usersWrites = new Writes[Option[models.Users]] {
     def writes(option: Option[Users]) = Json.obj(

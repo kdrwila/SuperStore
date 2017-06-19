@@ -13,7 +13,7 @@ import scala.concurrent.{ ExecutionContext, Future }
  */
 
 class ProductsDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
-  extends HasDatabaseConfigProvider[JdbcProfile] {
+    extends HasDatabaseConfigProvider[JdbcProfile] {
 
   import driver.api._
 
@@ -27,7 +27,8 @@ class ProductsDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvi
       futureProducts.map(
         _.map {
         a => ProductsREST(prodId = a.prodId, opis = a.opis, tytul = a.tytul, catId = a.catId)
-      }.toList)
+      }.toList
+      )
     }
 
   def get(id: Long): Future[Option[Products]] =

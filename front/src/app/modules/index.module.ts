@@ -32,6 +32,11 @@ export class MyAuthConfig extends CustomConfig {
 		{
 			clientId: GOOGLE_CLIENT_ID,
 			url: 'http://localhost:9900/authenticate/google'
+		},
+		facebook:
+		{
+			clientId: '1905555483065495',
+			url: 'http://localhost:9900/authenticate/facebook'
 		}
 	};
 }

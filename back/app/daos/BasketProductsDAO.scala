@@ -12,7 +12,7 @@ import scala.util.Success
 import scala.util.Failure
 
 class BasketProductsDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
-  extends HasDatabaseConfigProvider[JdbcProfile] {
+    extends HasDatabaseConfigProvider[JdbcProfile] {
 
   import driver.api._
 
@@ -26,7 +26,8 @@ class BasketProductsDAO @Inject() (protected val dbConfigProvider: DatabaseConfi
       futureBasketProducts.map(
         _.map {
         a => BasketProductsREST(id = a.id, user_id = a.user_id, quantity = a.quantity, product_id = a.product_id, type_id = a.type_id)
-      }.toList)
+      }.toList
+      )
     }
 
   def get(id: Long): Future[Option[BasketProducts]] =
