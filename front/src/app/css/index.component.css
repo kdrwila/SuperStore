@@ -46,3 +46,16 @@
     font-size: 9px;
     color: #333;
 }
+
+:host >>> .provider 
+{
+    background-color: #333;
+    display: inline-block;
+    border-bottom: 3px solid #0054ff;
+    cursor: pointer;
+}
+
+:host >>> .provider:hover
+{
+    background-color: #555;
+}
