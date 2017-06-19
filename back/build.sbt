@@ -1,7 +1,7 @@
 import com.tuplejump.sbt.yeoman.Yeoman
 import com.typesafe.sbt.SbtScalariform._
 
-import scalariform.formatter.preferences._
+// import scalariform.formatter.preferences._
 
 name := "play-silhouette-angular-seed"
 
@@ -51,9 +51,9 @@ scalacOptions ++= Seq(
 // Scalariform settings
 //********************************************************
 
-defaultScalariformSettings
+// defaultScalariformSettings
 
-ScalariformKeys.preferences := ScalariformKeys.preferences.value
-  .setPreference(FormatXml, false)
-  .setPreference(DoubleIndentClassDeclaration, false)
-  .setPreference(DanglingCloseParenthesis, Preserve)
+// ScalariformKeys.preferences := ScalariformKeys.preferences.value
+//   .setPreference(FormatXml, false)
+//   .setPreference(DoubleIndentClassDeclaration, false)
+//   .setPreference(DanglingCloseParenthesis, Preserve)

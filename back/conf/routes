@@ -3,6 +3,7 @@
 # ~~~~
 
 GET         /user                            controllers.ApplicationController.user
+GET         /user/:email                     controllers.ApplicationController.getUserWithEmail(email)
 
 GET         /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
 POST        /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)

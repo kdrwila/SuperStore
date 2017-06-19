@@ -22,14 +22,12 @@ class UsersDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider
 
   val Users = TableQuery[UsersTable]
 
-  //   def get(id: Long): Future[Option[Users]] =
-  //     {
-  //         val query = Products.filter(_.id === id)
-  //         val result = query.result
-  //         db.run(result.headOption)
-  //     }
-
-  // def insert(user: Users): Future[Unit] = db.run(Users += user).map { _ => () }
+  def getWithEmail(email: String): Future[Option[Users]] =
+    {
+      val query = Users.filter(_.email === email)
+      val result = query.result
+      db.run(result.headOption)
+    }
 
   def insert(user: Users)(implicit ec: ExecutionContext): Unit =
     {
@@ -56,11 +54,6 @@ class UsersDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider
         }
       }
     }
-
-  //   def update(product: Products): Future[Unit] = db.run {
-  //     val query = for { p <- Products if p.prodId === product.prodId } yield p
-  //     query.update(product).map(_ => ())
-  //   }
 
   def remove(id: Long): Future[Unit] = db.run {
     val query = for { u <- Users if u.id === id } yield u

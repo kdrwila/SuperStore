@@ -20,4 +20,15 @@ export class UserService
 
 		return this.http.get('http://localhost:9900/user', options);
 	}
+
+	getUserId(email: string)
+	{
+		const headers: Headers = new Headers();
+		headers.append('Accept', 'application/json');
+		headers.append('Content-Type', 'application/json');
+
+		const options = new RequestOptions({headers: headers});
+
+		return this.http.get('http://localhost:9900/user/' + email, options);
+	}
 }
