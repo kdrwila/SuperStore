@@ -14,11 +14,12 @@ import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
 import { BasketComponent } from '../components/basket.component';
 import { SignInComponent } from '../components/sign.in.component';
-import { AuthenticateComponent } from '../components/authenticate.component';
+import { SignOutComponent } from '../components/sign.out.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
 import { BasketService } from "../services/basket.service";
+import { UserService } from "../services/user.service";
 
 import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
 
@@ -49,7 +50,7 @@ export class MyAuthConfig extends CustomConfig {
 		ProductComponent,
 		BasketComponent,
 		SignInComponent,
-		AuthenticateComponent
+		SignOutComponent
 	],
 	imports: 
 	[
@@ -70,10 +71,10 @@ export class MyAuthConfig extends CustomConfig {
 			{ path: 'product/:id', component: ProductComponent },
 			{ path: 'basket', component: BasketComponent },
 			{ path: 'signin', component: SignInComponent },
-			{ path: 'authenticate/:provider', component: AuthenticateComponent }
+			{ path: 'signout', component: SignOutComponent }
 		])
 	],
-	providers: [ProductService, CategoryService, BasketService],
+	providers: [ProductService, CategoryService, BasketService, UserService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,8 +5,7 @@ import { JwtHttp, AuthService } from 'ng2-ui-auth';
 @Component(
 {
 	selector: 'app-sign-in',
-	templateUrl: '../views/sign.in.component.html',
-	styleUrls: ['../css/main.component.css']
+	templateUrl: '../views/sign.in.component.html'
 })
 
 export class SignInComponent implements OnInit 
