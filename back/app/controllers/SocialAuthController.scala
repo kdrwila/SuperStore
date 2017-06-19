@@ -14,6 +14,9 @@ import play.api.libs.json.Json
 import play.api.mvc._
 import utils.auth.DefaultEnv
 
+import daos.UsersDAO
+import models.Users
+
 import scala.concurrent.Future
 import scala.concurrent.duration._
 import scala.language.postfixOps
@@ -27,14 +30,7 @@ import scala.language.postfixOps
  * @param authInfoRepository The auth info service implementation.
  * @param socialProviderRegistry The social provider registry.
  */
-class SocialAuthController @Inject() (
-  val messagesApi: MessagesApi,
-  silhouette: Silhouette[DefaultEnv],
-  userService: UserService,
-  authInfoRepository: AuthInfoRepository,
-  socialProviderRegistry: SocialProviderRegistry,
-  cache: CacheApi)
-  extends Controller with I18nSupport with Logger {
+class SocialAuthController @Inject() ()(silhouette: Silhouette[DefaultEnv], authInfoRepository: AuthInfoRepository, socialProviderRegistry: SocialProviderRegistry, cache: CacheApi, usersDAO: UsersDAO, userService: UserService) extends Controller with Logger {
 
   /**
    * Authenticates a user against a social provider.
@@ -51,6 +47,10 @@ class SocialAuthController @Inject() (
             case Right(authInfo) => for {
               profile <- p.retrieveProfile(authInfo)
               user <- userService.save(profile)
+
+              user_r = Users(id = 0, name = profile.firstName, surname = profile.lastName, email = profile.email)
+              temp = usersDAO.insert(user_r)
+
               authInfo <- authInfoRepository.save(profile.loginInfo, authInfo)
               authenticator <- silhouette.env.authenticatorService.create(profile.loginInfo)
               token <- silhouette.env.authenticatorService.init(authenticator)
@@ -63,7 +63,7 @@ class SocialAuthController @Inject() (
       }).recover {
         case e: ProviderException =>
           logger.error("Unexpected provider error", e)
-          Unauthorized(Json.obj("message" -> Messages("could.not.authenticate")))
+          Unauthorized(Json.obj("message" -> "could not authenticate"))
       }
     }
   }
