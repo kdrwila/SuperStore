@@ -13,5 +13,11 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+/bin
+/node_modules
 
-    
+#ruby
+.bundle
+
+#OS X
+.DS_Store

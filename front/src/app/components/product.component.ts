@@ -5,7 +5,7 @@ import { BasketService } from '../services/basket.service';
 import { CategoryService } from '../services/category.service';
 import { Product } from '../models/product';
 import { ProductType } from '../models/productType';
-import { Category } from '../models/Category';
+import { Category } from '../models/category';
 import { ActivatedRoute } from "@angular/router";
 
 @Component(
@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit
 
 	addProductToBasket(product: ProductType, amount: number)
 	{
-		this.basketService.addProductToBasket(product, -1, amount).subscribe
+		this.basketService.addProductToBasket(product, this.index.userId, amount).subscribe
 		(
 			data =>
 			{

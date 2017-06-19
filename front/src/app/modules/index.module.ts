@@ -13,10 +13,33 @@ import { AdminCategoryEditComponent } from '../components/admin.category.edit.co
 import { ProductComponent } from '../components/product.component';
 import { CategoryComponent } from '../components/category.component';
 import { BasketComponent } from '../components/basket.component';
+import { SignInComponent } from '../components/sign.in.component';
+import { SignOutComponent } from '../components/sign.out.component';
 import { RouterModule } from "@angular/router";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../services/category.service";
 import { BasketService } from "../services/basket.service";
+import { UserService } from "../services/user.service";
+
+import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
+
+export const GOOGLE_CLIENT_ID = '642191352132-q9084r0rvd2f35jj3hue910e1orne2a2.apps.googleusercontent.com';
+export class MyAuthConfig extends CustomConfig {
+    defaultHeaders = {'Content-Type': 'application/json'};
+    providers = 
+	{
+		google: 
+		{
+			clientId: GOOGLE_CLIENT_ID,
+			url: 'http://localhost:9900/authenticate/google'
+		},
+		facebook:
+		{
+			clientId: '1905555483065495',
+			url: 'http://localhost:9900/authenticate/facebook'
+		}
+	};
+}
 
 @NgModule(
 {
@@ -30,7 +53,9 @@ import { BasketService } from "../services/basket.service";
 		AdminCategoryEditComponent,
 		CategoryComponent,
 		ProductComponent,
-		BasketComponent
+		BasketComponent,
+		SignInComponent,
+		SignOutComponent
 	],
 	imports: 
 	[
@@ -38,6 +63,7 @@ import { BasketService } from "../services/basket.service";
 		HttpModule,
 		FormsModule,
 		ReactiveFormsModule,
+		Ng2UiAuthModule.forRoot(MyAuthConfig),
 		RouterModule.forRoot(
 		[
 			{ path: '.', component: AppComponent },
@@ -49,10 +75,11 @@ import { BasketService } from "../services/basket.service";
 			{ path: 'category/:id', component: CategoryComponent },
 			{ path: 'product/:id', component: ProductComponent },
 			{ path: 'basket', component: BasketComponent },
-			{ path: 'moreparams/:tytul/:opis', component: AdminProductComponent }
+			{ path: 'signin', component: SignInComponent },
+			{ path: 'signout', component: SignOutComponent }
 		])
 	],
-	providers: [ProductService, CategoryService, BasketService],
+	providers: [ProductService, CategoryService, BasketService, UserService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

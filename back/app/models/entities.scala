@@ -5,8 +5,8 @@ import java.sql.Timestamp
 import play.api.libs.json.Format
 
 /**
-  * Created by kprzystalski on 23/04/17.
-  */
+ * Created by kprzystalski on 23/04/17.
+ */
 
 case class Categories(catId: Long, tytul: String, opis: String)
 
@@ -18,4 +18,4 @@ case class BasketProducts(id: Long, user_id: Long, quantity: Long, product_id: L
 
 //case class Purchases(purId: Long, prodId: Long, userId: Long)
 
-//case class Users(userId: Long, username: String)
+case class Users(id: Long, name: Option[String], surname: Option[String], email: Option[String])
