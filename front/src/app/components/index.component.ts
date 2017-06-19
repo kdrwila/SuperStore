@@ -19,25 +19,36 @@ export class AppComponent implements OnInit
 	title = 'SuperStore';
 	categories: Category[];
 	@Input()
-	cartItemCount: number = 1;
+	cartItemCount: number = 0;
 	user: any;
+	userId: number;
 
 	constructor(private categoryService: CategoryService, private basketService: BasketService, private auth: AuthService, private userService: UserService) { }
 
 	ngOnInit() 
 	{
 		this.categoryService.getCategories().subscribe(data => this.categories = data);
-		this.basketService.getProductsInBasket(-1).subscribe(data =>
-		{
-			this.cartItemCount = data.length;
-		});
-
+	
 		console.log(this.auth.getPayload());
 
 		this.userService.getUser().subscribe(data =>
 		{
 			this.user = data;
 			this.user = JSON.parse(this.user._body);
+
+			this.userService.getUserId(this.user.email).subscribe(data =>
+			{
+				var temp: any = data;
+				this.userId = JSON.parse(temp._body).id;
+
+				this.basketService.getProductsInBasket(this.userId).subscribe(data =>
+				{
+					this.cartItemCount = data.length;
+				});
+			},
+			err =>{
+				console.error(err);
+			});
 		},
 		err =>{
 			console.error(err);

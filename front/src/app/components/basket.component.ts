@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from "../components/index.component";
 import { BasketService } from '../services/basket.service';
 import { ProductService } from '../services/product.service';
+import { UserService } from '../services/user.service';
 import { BasketProduct } from '../models/basketProduct';
 import { ProductType } from '../models/productType';
 import { ActivatedRoute } from "@angular/router";
@@ -15,32 +16,44 @@ import { ActivatedRoute } from "@angular/router";
 
 export class BasketComponent implements OnInit 
 {
-	constructor(private basketService: BasketService, private productService: ProductService, private route: ActivatedRoute, private index: AppComponent) { }
+	constructor(private basketService: BasketService, private productService: ProductService, private route: ActivatedRoute, private index: AppComponent, private userService: UserService) { }
 
 	basketProducts: BasketProduct[];
 	totalCost: number = 0;
 
 	ngOnInit() 
 	{
-		this.basketService.getProductsInBasket(-1).subscribe(data => 
+		this.userService.getUser().subscribe(data =>
 		{
-			this.basketProducts = data
-			for(var p in this.basketProducts)
+			var user: any = data;
+			var email: string = JSON.parse(user._body).email;
+
+			this.userService.getUserId(email).subscribe(data =>
 			{
-				const x = p;
-				this.productService.getProduct(this.basketProducts[p].product_id).subscribe(data =>
+				var temp: any = data;
+				var userId = JSON.parse(temp._body).id;
+
+				this.basketService.getProductsInBasket(userId).subscribe(data => 
 				{
-					this.basketProducts[x].product_data = data.product;
-					for(var t in data.types)
+					this.basketProducts = data
+					for(var p in this.basketProducts)
 					{
-						if(data.types[t].type_id == this.basketProducts[x].type_id)
+						const x = p;
+						this.productService.getProduct(this.basketProducts[p].product_id).subscribe(data =>
 						{
-							this.basketProducts[x].type_data = data.types[t];
-							this.totalCost += this.basketProducts[x].type_data.price * this.basketProducts[x].quantity;
-						}
+							this.basketProducts[x].product_data = data.product;
+							for(var t in data.types)
+							{
+								if(data.types[t].type_id == this.basketProducts[x].type_id)
+								{
+									this.basketProducts[x].type_data = data.types[t];
+									this.totalCost += this.basketProducts[x].type_data.price * this.basketProducts[x].quantity;
+								}
+							}
+						});
 					}
 				});
-			}
+			});
 		});
 	}
 
@@ -51,7 +64,7 @@ export class BasketComponent implements OnInit
 
 	removeProductFromBasket(id: number)
 	{
-		this.basketService.removeProductFromBasket(-1, id).subscribe
+		this.basketService.removeProductFromBasket(this.index.userId, id).subscribe
 		(
 			data =>
 			{
@@ -84,7 +97,7 @@ export class BasketComponent implements OnInit
 		p.product_id = product.product_id;
 		p.type_id = product.type_id;
 
-		this.basketService.addProductToBasket(p, -1, amount).subscribe
+		this.basketService.addProductToBasket(p, this.index.userId, amount).subscribe
 		(
 			data =>
 			{
